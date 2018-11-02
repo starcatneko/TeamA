@@ -127,11 +127,13 @@
     <ClCompile Include="ImgMng.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="VECTOR2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameTask.h" />
     <ClInclude Include="ImgMng.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="VECTOR2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
