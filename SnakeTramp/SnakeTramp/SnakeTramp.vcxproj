@@ -123,6 +123,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="GameTask.cpp" />
     <ClCompile Include="ImgMng.cpp" />
     <ClCompile Include="main.cpp" />
@@ -130,6 +132,8 @@
     <ClCompile Include="VECTOR2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Card.h" />
     <ClInclude Include="GameTask.h" />
     <ClInclude Include="ImgMng.h" />
     <ClInclude Include="Player.h" />
