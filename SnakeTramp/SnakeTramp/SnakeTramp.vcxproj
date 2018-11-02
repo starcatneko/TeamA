@@ -116,13 +116,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameTask.cpp" />
-    <ClCompile Include="ImageMng.cpp" />
+    <ClCompile Include="ImgMng.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameTask.h" />
-    <ClInclude Include="ImageMng.h" />
+    <ClInclude Include="ImgMng.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
