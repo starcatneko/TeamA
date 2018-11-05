@@ -15,6 +15,29 @@ GameTask::GameTask()
 
 GameTask::~GameTask()
 {
+
+}
+
+bool GameTask::PressKey(int key)
+{
+	static std::map<int, int> keymap;
+	
+	if (keymap[key] == -1)
+	{
+		keymap[key] = 0;
+		return false;
+	}
+
+	if (CheckHitKey(key) == true)
+	{
+		keymap[key]++;
+	}
+	else if(keymap[key] > 0)
+	{
+		keymap[key] = -1;
+	}
+
+	return (keymap[key] == 1 ? true:false);
 }
 
 void GameTask::Run()

@@ -1,3 +1,4 @@
+#include "GameTask.h"
 #include "SceneTitle.h"
 #include "SceneMain.h"
 #include "Dxlib.h"
@@ -18,7 +19,7 @@ void SceneTitle::Init()
 
 Scene SceneTitle::Update(Scene own)
 {
-	if (CheckHitKey(KEY_INPUT_1))
+	if (lpGameTask.PressKey(KEY_INPUT_1))
 	{
 		return std::make_unique<SceneMain>();
 	}

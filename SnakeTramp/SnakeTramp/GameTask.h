@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-
+#include <map>
 #define lpGameTask GameTask::GetInstance()
 
 class SceneState;
@@ -12,9 +12,12 @@ public:
 	{
 		return *s_Instance;
 	};
+	//int keybuf
 
+	// キーが押されたかどうかをチェックする
+	// 一回のみのキー処理が可能
+	bool PressKey(int key);
 	void Run();
-
 private:
 	struct GameTaskDeleter
 	{
