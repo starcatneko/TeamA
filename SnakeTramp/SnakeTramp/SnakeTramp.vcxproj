@@ -130,6 +130,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneMain.cpp" />
+    <ClCompile Include="SceneResult.cpp" />
     <ClCompile Include="SceneState.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="VECTOR2.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="ImgMng.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneMain.h" />
+    <ClInclude Include="SceneResult.h" />
     <ClInclude Include="SceneState.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="VECTOR2.h" />
