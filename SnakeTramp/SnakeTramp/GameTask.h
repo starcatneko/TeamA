@@ -3,6 +3,8 @@
 
 #define lpGameTask GameTask::GetInstance()
 
+class SceneState;
+
 class GameTask
 {
 public:
@@ -22,6 +24,7 @@ private:
 		}
 	};
 
+	std::unique_ptr<SceneState> state;
 	static std::unique_ptr<GameTask, GameTaskDeleter> s_Instance;
 
 	GameTask();
