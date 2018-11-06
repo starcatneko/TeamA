@@ -20,8 +20,8 @@ void SceneMain::Init()
 {
 	// –œ‚ªˆêBoard‚Ìunique_ptr‚ª‰Šú‰»‚³‚ê‚Ä‚¢‚È‚©‚Á‚½ê‡reset‚ğ‚·‚é
 	if (board) board.reset();
-	card = std::make_unique<Card>();
-	board = std::make_shared<Board>();
+	//card = std::make_unique<Card>();
+	//board = std::make_shared<Board>();
 
 	//”Õ–ÊAPlayer“™‰Šú‰»ˆ—
 }
