@@ -1,19 +1,16 @@
-#include "Board.h"
 #include "VECTOR2.h"
+#include "GameTask.h"
+#include "Board.h"
+#include "Card.h"
 
-
-VECTOR2 Board::BoardTrout()
-{
-	return VECTOR2(troutCnt.x, troutCnt.y);
-}
 
 bool Board::CheckBoard(VECTOR2 pos)
 {
-	for (int y = 0; y < BoardTrout().y; y++)
+	for (int y = 0; y < troutCnt.y; y++)
 	{
-		for (int x = 0; x < BoardTrout().x; x++)
+		for (int x = 0; x < troutCnt.x; x++)
 		{
-
+			
 		}
 	}
 	return false;
@@ -24,16 +21,33 @@ bool Board::SetBoard(VECTOR2 pos)
 	return false;
 }
 
-Board::Board(bool defFlag, VECTOR2 troutCnt)
+Board::Board()
 {
-	changeFlag = defFlag;
-	if (changeFlag)
+	troutCnt = VECTOR2(BOARD_DEF_TROUT_X, BOARD_DEF_TROUT_Y);
+}
+
+Board::Board(VECTOR2 troutCnt)
+{
+	this->troutCnt = troutCnt;
+}
+
+void Board::PushTrout(void)
+{
+	if (lpGameTask.PressKey(KEY_INPUT_UP))
 	{
-		this->troutCnt = troutCnt;
+
 	}
-	else if (!changeFlag)
+	else if (lpGameTask.PressKey(KEY_INPUT_DOWN))
 	{
-		this->troutCnt = VECTOR2(BOARD_DEF_TROUT_X, BOARD_DEF_TROUT_Y);
+
+	}
+	else if (lpGameTask.PressKey(KEY_INPUT_RIGHT))
+	{
+
+	}
+	else if (lpGameTask.PressKey(KEY_INPUT_LEFT))
+	{
+
 	}
 }
 
