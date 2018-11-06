@@ -8,3 +8,5 @@
 *.pdb
 *.opendb
 SnakeTramp/.vs/SnakeTramp/v15/.suo
+*.exe
+SnakeTramp/SnakeTramp/Log.txt
