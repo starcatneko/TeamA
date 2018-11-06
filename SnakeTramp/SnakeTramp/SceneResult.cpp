@@ -1,9 +1,9 @@
 #include "SceneResult.h"
 #include "GameTask.h"
 #include "SceneTitle.h"
-#include "Board.h"
 #include "Dxlib.h"
 
+class Board;
 
 SceneResult::SceneResult()
 {

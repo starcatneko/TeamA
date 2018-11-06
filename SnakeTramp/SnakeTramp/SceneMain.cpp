@@ -24,7 +24,7 @@ void SceneMain::Init()
 	
 	//card = std::make_unique<Card>(VECTOR2{ 2,2 }, SUIT_HEART, 12);
 	// boardのコンストラクタに引数を渡さない場合、BOARD_DEF_TROUT_XとBOARD_DEF_TROUT_Yが渡される
-	//board = std::make_shared<Board>();
+	board = std::make_shared<Board>();
 	
 
 	//盤面、Player等初期化処理
@@ -47,7 +47,7 @@ Scene SceneMain::Update(Scene own)
 		Player::移動(方向);
 	}
 	*/
-	board.get();
+	board->Update();
 
 	// if(Playerがゴールにたどり着く ||
 	// Playerの数値が規定範囲を超える)

@@ -1,7 +1,7 @@
 #pragma once
 #include "SceneState.h"
-
-class Board;
+#include "Board.h"
+//class Board;
 
 class SceneResult :
 	public SceneState
