@@ -5,7 +5,8 @@
 Card::Card()
 {
 	Reset();
-	//image.resize(1);	// vectorï¿½Ìgï¿½pï¿½ÍˆÍ‚ï¿½wï¿½ï¿½
+	//image.resize(1);	// vector‚Ìg—p”ÍˆÍ‚ğw’è
+	//Load("");			// “Ç‚İ‚Ş‰æ‘œ‚ª‚È‚¢‚½‚ßA‚í‚´‚Æ‹ó”’‚É‚µ‚Ä‚¢‚é
 	pos = { 0,0 };
 	suit = SUIT_NUM;
 	number = 0;
@@ -14,8 +15,8 @@ Card::Card()
 Card::Card(VECTOR2 pos, CARD_SUIT suit, int number)
 {
 	Reset();
-	//image.resize(1);	// vectorï¿½Ìgï¿½pï¿½ÍˆÍ‚ï¿½wï¿½ï¿½
-	//Load("");			// ï¿½Ç‚İï¿½ï¿½Ş‰æ‘œï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ßAï¿½í‚´ï¿½Æ‹ó”’‚É‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+	//image.resize(1);	// vector‚Ìg—p”ÍˆÍ‚ğw’è
+	//Load("");			// “Ç‚İ‚Ş‰æ‘œ‚ª‚È‚¢‚½‚ßA‚í‚´‚Æ‹ó”’‚É‚µ‚Ä‚¢‚é
 	this->pos = pos;
 	this->suit = suit;
 	this->number = number;
@@ -29,12 +30,12 @@ Card::~Card()
 void Card::Draw()
 {
 	int num = 0;
-	// ï¿½Gï¿½ï¿½
-	if (suit == SUIT_SPADE) DrawString(pos.x, pos.y, "ï¿½Xï¿½yï¿½[ï¿½h ", SetColor(suit));
-	else if (suit == SUIT_CRUB) DrawString(pos.x, pos.y, "ï¿½Nï¿½ï¿½ï¿½u", SetColor(suit));
-	else if (suit == SUIT_DIA) DrawString(pos.x, pos.y, "ï¿½_ï¿½Cï¿½A", SetColor(suit));
-	else if (suit == SUIT_HEART) DrawString(pos.x, pos.y, "ï¿½nï¿½[ï¿½g", SetColor(suit));
-	// ï¿½Ôï¿½
+	// ŠG•¿
+	if (suit == SUIT_SPADE) DrawString(pos.x, pos.y, "ƒXƒy[ƒh ", SetColor(suit));
+	else if (suit == SUIT_CRUB) DrawString(pos.x, pos.y, "ƒNƒ‰ƒu", SetColor(suit));
+	else if (suit == SUIT_DIA) DrawString(pos.x, pos.y, "ƒ_ƒCƒA", SetColor(suit));
+	else if (suit == SUIT_HEART) DrawString(pos.x, pos.y, "ƒn[ƒg", SetColor(suit));
+	// ”Ô†
 	if (suit == SUIT_SPADE) num = 80;
 	else num = 60;
 	DrawFormatString(pos.x + num, pos.y, SetColor(suit),"%d",number);
@@ -47,7 +48,7 @@ void Card::Load(std::string fileName)
 
 unsigned int Card::SetColor(CARD_SUIT suit)
 {
-	// ï¿½È’Pï¿½ÉƒXï¿½[ï¿½gï¿½ï¿½ÄFï¿½ï¿½Ï‚ï¿½ï¿½ï¿½
+	// ŠÈ’P‚ÉƒX[ƒg‚ğŒ©‚ÄF‚ğ•Ï‚¦‚é
 	if (suit == SUIT_SPADE || suit == SUIT_CRUB) color = 0x000000;
 	else if (suit == SUIT_DIA || suit == SUIT_HEART) color = 0xff0000;
 	return color;
