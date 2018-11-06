@@ -37,5 +37,7 @@ private:
 
 	int moveDirection;
 
+	const TCHAR *DebugChar = "‰E";		// ÃÞÊÞ¯¸Þ—p•¶Žš—ñ
+
 };
 

@@ -7,6 +7,7 @@
 void Board::Update(void)
 {
 	PushTrout();
+	DrawString(50, 0, DebugChar, GetColor(255, 255, 255));
 }
 
 bool Board::CheckBoard(VECTOR2 pos)
@@ -27,25 +28,25 @@ void Board::PushTrout(void)
 	{
 		moveDirection = DIR_UP;
 		ckPos = pPos + VECTOR2(0, 1);
-		DrawString(50, 0, "è„", GetColor(255, 255, 255));
+		DebugChar = "è„";
 	}
 	else if (lpGameTask.PressKey(KEY_INPUT_RIGHT))
 	{
 		moveDirection = DIR_RIGHT;
 		ckPos = pPos + VECTOR2(1,0);
-		DrawString(50, 0, "âE", GetColor(255, 255, 255));
+		DebugChar = "âE";
 	}
 	else if (lpGameTask.PressKey(KEY_INPUT_DOWN))
 	{
 		moveDirection = DIR_DOWN;
 		ckPos = pPos + VECTOR2(0, -1);
-		DrawString(50, 0, "â∫", GetColor(255, 255, 255));
+		DebugChar = "â∫";
 	}
 	else if (lpGameTask.PressKey(KEY_INPUT_LEFT))
 	{
 		moveDirection = DIR_LEFT;
 		ckPos = pPos + VECTOR2(-1,0);
-		DrawString(50, 0, "è„", GetColor(255, 255, 255));
+		DebugChar = "ç∂";
 	}
 }
 
