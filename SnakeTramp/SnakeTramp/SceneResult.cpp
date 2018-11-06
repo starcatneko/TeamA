@@ -1,26 +1,42 @@
 #include "SceneResult.h"
-
+#include "GameTask.h"
+#include "SceneTitle.h"
+#include "Dxlib.h"
 
 
 SceneResult::SceneResult()
 {
 }
 
+SceneResult::SceneResult(std::shared_ptr<Board> board)
+{
+	SceneResult::board = board;
+}
+
 
 SceneResult::~SceneResult()
 {
+
 }
 
 void SceneResult::Init()
 {
+
 }
 
 Scene SceneResult::Update(Scene own)
 {
-	return Scene();
+
+	if (lpGameTask.PressKey(KEY_INPUT_Z))
+	{
+		return std::make_unique<SceneTitle>();
+	}
+	return own;
 }
 
 bool SceneResult::Draw()
 {
-	return false;
+	//board•`‰æ
+
+	return true;
 }

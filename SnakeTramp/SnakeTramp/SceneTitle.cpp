@@ -19,7 +19,7 @@ void SceneTitle::Init()
 
 Scene SceneTitle::Update(Scene own)
 {
-	if (lpGameTask.PressKey(KEY_INPUT_1))
+	if (lpGameTask.PressKey(KEY_INPUT_Z))
 	{
 		return std::make_unique<SceneMain>();
 	}

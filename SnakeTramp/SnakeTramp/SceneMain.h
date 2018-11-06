@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneState.h"
-#include <memory>
+
+class Board;
 
 class SceneMain :
 	public SceneState
@@ -11,5 +12,7 @@ public:
 	void Init();
 	Scene Update(Scene own);
 	bool Draw();
+
+	std::shared_ptr<Board> board;
 };
 
