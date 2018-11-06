@@ -5,12 +5,12 @@
 #define lpGameTask GameTask::GetInstance()
 
 // “ü—Í‚³‚ê‚½\šƒL[‚Ì•ûŒü
-enum KEY_DIR
+enum DIR
 {
-	KEY_UP,
-	KEY_RIGHT,
-	KEY_DOWN,
-	KEY_DLEFT
+	DIR_UP,
+	DIR_RIGHT,
+	DIR_DOWN,
+	DIR_LEFT
 };
 
 class SceneState;
