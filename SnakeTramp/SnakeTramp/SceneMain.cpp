@@ -4,10 +4,11 @@
 #include "SceneResult.h"
 #include "VECTOR2.h"
 #include "Dxlib.h"
-
 #include "Card.h"
 
 #include <memory>
+
+
 
 
 SceneMain::SceneMain()
@@ -25,7 +26,7 @@ void SceneMain::Init()
 	//card = std::make_unique<Card>(VECTOR2{ 2,2 }, SUIT_HEART, 12);
 	// boardのコンストラクタに引数を渡さない場合、BOARD_DEF_TROUT_XとBOARD_DEF_TROUT_Yが渡される
 	board = std::make_shared<Board>();
-	
+	//player.pos = BOARD_START;
 
 	//盤面、Player等初期化処理
 }
@@ -49,22 +50,74 @@ Scene SceneMain::Update(Scene own)
 	*/
 	board->Update();
 
-	// if(Playerがゴールにたどり着く ||
-	// Playerの数値が規定範囲を超える)
+	/*
+	if(player.pos == BOARD_DEF_GOAL ||
+	 Playerの数値が規定範囲を超える)
+	{
+		ゴール演出();
+		return;
+	}
+	*/
 
+
+	// test
+	static bool flg = false;
 	if(lpGameTask.PressKey(KEY_INPUT_Z))
 	{
-		return std::make_unique<SceneResult>();
+		flg = true;
+	}
+	if (flg == true)
+	{
+		if (GoalEffect() == true)
+		{
+			return std::make_unique<SceneResult>();
+		}
+
 	}
 	return own;
 }
 
 bool SceneMain::Draw()
 {
-	// Board::描画();
-	// Player::描画();
-	//(*card).Draw();
-	DrawString(0, 0, "Main", 0x888888);
-	
+	/*
+	 board->描画(); // card->Draw()
+	 lpGameTask.player->描画();
+	*/
+
+	int BOARD_DIS_X = 64;
+	int BOARD_DIS_Y = 64;
+	int CHIPSIZE = 48;
+		for (int x = 0; x < BOARD_DEF_TROUT_X; x++)
+		{
+			for (int y = 0; y < BOARD_DEF_TROUT_Y; y++)
+			{
+				int forx = BOARD_DIS_X + x * CHIPSIZE;
+				int fory = BOARD_DIS_Y + y * CHIPSIZE;
+				DrawBox(forx, fory,
+					forx + CHIPSIZE, fory + CHIPSIZE,
+					0x00FF00, false);
+			}
+		}
+	DrawString(0, 0, "Main", 0x888888);	
 	return false;
 }
+
+bool SceneMain::GoalEffect()
+{
+	// 演出のタイマー
+	static UINT timer = 18;
+
+	//関数実行後、タイマーが0になったタイミングで処理を終了、次のシーンに推移させる
+	if (timer > 0)
+	{
+
+
+
+		timer--;
+		if (timer == 0)
+		{
+			return true;
+		}
+	}
+	return false;
+};
