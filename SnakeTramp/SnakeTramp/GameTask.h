@@ -1,7 +1,17 @@
 #pragma once
 #include <memory>
 #include <map>
+#include "DxLib.h"
 #define lpGameTask GameTask::GetInstance()
+
+// “ü—Í‚³‚ê‚½\šƒL[‚Ì•ûŒü
+enum KEY_DIR
+{
+	KEY_UP,
+	KEY_RIGHT,
+	KEY_DOWN,
+	KEY_DLEFT
+};
 
 class SceneState;
 
