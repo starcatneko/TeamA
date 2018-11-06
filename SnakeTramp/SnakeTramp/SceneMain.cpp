@@ -5,22 +5,22 @@
 #include "VECTOR2.h"
 #include "Dxlib.h"
 
+#include "Card.h"
+
+#include <memory>
+
 
 SceneMain::SceneMain()
 {
-
 }
-
-
 SceneMain::~SceneMain()
 {
 }
-
 void SceneMain::Init()
 {
 	// –œ‚ªˆêBoard‚Ìunique_ptr‚ª‰Šú‰»‚³‚ê‚Ä‚¢‚È‚©‚Á‚½ê‡reset‚ğ‚·‚é
 	if (board) board.reset();
-
+	card = std::make_unique<Card>();
 	board = std::make_shared<Board>();
 
 	//”Õ–ÊAPlayer“™‰Šú‰»ˆ—
@@ -59,7 +59,7 @@ bool SceneMain::Draw()
 {
 	// Board::•`‰æ();
 	// Player::•`‰æ();
-
+	(*card).Draw();
 	DrawString(0, 0, "Main", 0x888888);
 	return false;
 }
