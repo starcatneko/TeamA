@@ -12,6 +12,7 @@
 
 SceneMain::SceneMain()
 {
+	Init();
 }
 SceneMain::~SceneMain()
 {
@@ -20,8 +21,11 @@ void SceneMain::Init()
 {
 	// 万が一Boardのunique_ptrが初期化されていなかった場合resetをする
 	if (board) board.reset();
-	//card = std::make_unique<Card>();
+	
+	//card = std::make_unique<Card>(VECTOR2{ 2,2 }, SUIT_HEART, 12);
+	// boardのコンストラクタに引数を渡さない場合、BOARD_DEF_TROUT_XとBOARD_DEF_TROUT_Yが渡される
 	//board = std::make_shared<Board>();
+	
 
 	//盤面、Player等初期化処理
 }
@@ -59,7 +63,8 @@ bool SceneMain::Draw()
 {
 	// Board::描画();
 	// Player::描画();
-	(*card).Draw();
+	//(*card).Draw();
 	DrawString(0, 0, "Main", 0x888888);
+	
 	return false;
 }
