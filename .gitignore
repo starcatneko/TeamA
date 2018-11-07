@@ -8,5 +8,9 @@
 *.pdb
 *.opendb
 SnakeTramp/.vs/SnakeTramp/v15/.suo
+<<<<<<< HEAD
+~$PGplan.xlsx
+=======
 *.exe
 SnakeTramp/SnakeTramp/Log.txt
+>>>>>>> master
