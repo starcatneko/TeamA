@@ -11,6 +11,8 @@ class Card;
 #define BOARD_START				(VECTOR2(0,0))	// ÌßÚ²Ô°‚Ì½À°ÄˆÊ’u
 #define BOARD_DEF_GOAL			((VECTOR2(BOARD_DEF_TROUT_X + 1,BOARD_DEF_TROUT_Y))
 
+#define TROUT_SIZE				(60)	// Ï½‚Ì»²½Þ
+
 
 class Board
 {
@@ -25,8 +27,7 @@ private:
 
 	std::vector<std::weak_ptr<Card>*> data;
 
-	bool CheckBoard(VECTOR2 pos);
-	bool SetBoard(VECTOR2 pos);
+	bool CheckBoard(VECTOR2 pos, int moveDirection);
 
 	bool changeFlag;
 
