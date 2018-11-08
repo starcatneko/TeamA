@@ -1,9 +1,9 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include <list>
 #include "VECTOR2.h"
-
-class Card;
+#include "Card.h"
 
 #define BOARD_DEF_TROUT_X		(7)		// Ï½‚ÌÃŞÌ«ÙÄ‚Ì”
 #define BOARD_DEF_TROUT_Y		(7)		// Ï½‚ÌÃŞÌ«ÙÄ‚Ì”
@@ -14,6 +14,19 @@ class Card;
 #define TROUT_SIZE				(60)	// Ï½‚Ì»²½Ş
 
 
+using namespace std;
+
+using card_weak = weak_ptr<Card>;
+using card_weakList = list<card_weak>;
+
+using  card_shared = shared_ptr<Card>;
+using  card_sharedList = list<card_shared>;
+
+using cardST_unique = unique_ptr<Card>;
+using cardST_uniqueList = list<cardST_unique>;
+
+
+
 class Board
 {
 public:
@@ -22,19 +35,31 @@ public:
 	Board(VECTOR2 troutCnt);	// ˆø”•t‚«ºİ½Ä×¸ÀÏ½”‚Ìw’è‚ª‚Å‚«‚é
 	void Update(void);
 
+	void SetBoard(card_shared card);
+	card_weak GetBoard(VECTOR2 pos);
+
 	void PushTrout(void);
 private:
+	auto AddObjList(card_shared && objPtr);
 
-	std::vector<std::weak_ptr<Card>*> data;
+	vector<std::weak_ptr<Card>*> data;
 
 	bool CheckBoard(VECTOR2 pos, int moveDirection);
 
 	bool changeFlag;
 
 	VECTOR2 troutCnt;
-
 	VECTOR2 pPos;		// ÌßÚ²Ô°‚ÌPos
 	VECTOR2 ckPos;		// ˆÚ“®‚·‚é—\’è‚ÌPos
+
+
+	VECTOR2 screenSize;
+	VECTOR2 boardSize;
+	VECTOR2 boardLT;
+
+	card_sharedList cardList;
+	cardST_uniqueList suit;
+
 
 	int moveDirection;
 
