@@ -8,15 +8,13 @@
 
 #include <memory>
 
-
-
-
 SceneMain::SceneMain()
 {
 	Init();
 }
 SceneMain::~SceneMain()
 {
+
 }
 void SceneMain::Init()
 {
@@ -27,7 +25,6 @@ void SceneMain::Init()
 	// boardのコンストラクタに引数を渡さない場合、BOARD_DEF_TROUT_XとBOARD_DEF_TROUT_Yが渡される
 	board = std::make_shared<Board>();
 	//player.pos = BOARD_START;
-
 	//盤面、Player等初期化処理
 }
 
@@ -55,12 +52,12 @@ Scene SceneMain::Update(Scene own)
 	 Playerの数値が規定範囲を超える)
 	{
 		ゴール演出();
-		return;
+		return std::make_unique<SceneResult>();
 	}
 	*/
 
 
-	// test
+	// 画面遷移フラグ true:遷移処理開始
 	static bool flg = false;
 	if(lpGameTask.PressKey(KEY_INPUT_Z))
 	{
@@ -84,6 +81,7 @@ bool SceneMain::Draw()
 	 lpGameTask.player->描画();
 	*/
 
+	/*
 	int BOARD_DIS_X = 64;
 	int BOARD_DIS_Y = 64;
 	int CHIPSIZE = 48;
@@ -98,6 +96,7 @@ bool SceneMain::Draw()
 					0x00FF00, false);
 			}
 		}
+		*/
 	DrawString(0, 0, "Main", 0x888888);	
 	return false;
 }
@@ -106,16 +105,17 @@ bool SceneMain::GoalEffect()
 {
 	// 演出のタイマー
 	static UINT timer = 18;
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 / timer);
+	DrawBox(0, 0, 0xfff, 0xfff, 0xffffff, true);
 
-	//関数実行後、タイマーが0になったタイミングで処理を終了、次のシーンに推移させる
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
+	// 関数実行後、タイマーが0になったタイミングで処理を終了、次のシーンに推移させる
 	if (timer > 0)
 	{
-
-
-
 		timer--;
 		if (timer == 0)
 		{
+			timer = 18;
 			return true;
 		}
 	}

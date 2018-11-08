@@ -1,5 +1,7 @@
 #pragma once
 #include "SceneState.h"
+#include <memory>
+#include <map>
 
 class Board;
 class Card;
@@ -16,13 +18,12 @@ public:
 	void Init();
 	Scene Update(Scene own);
 	bool Draw();
-
 	bool GoalEffect();
+	bool Effect(std::map<int,std::string>);
 
 private:
 	std::unique_ptr<Card> card;
 	std::shared_ptr<Board> board;
-
 	// アニメーション処理等で使うカウンター
 	UINT anim_cnt;
 };
