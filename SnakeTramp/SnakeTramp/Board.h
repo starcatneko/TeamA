@@ -43,8 +43,10 @@ private:
 	auto AddObjList(card_shared && objPtr);
 
 	vector<std::weak_ptr<Card>*> data;
+	vector<std::weak_ptr<Card>> baseData;
 
 	bool CheckBoard(VECTOR2 pos, int moveDirection);
+	bool Resize(VECTOR2 vec);
 
 	bool changeFlag;
 
