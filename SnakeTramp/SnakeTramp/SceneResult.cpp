@@ -39,6 +39,8 @@ Scene SceneResult::Update(Scene own)
 	{
 		if (Effect() == true)
 		{
+
+			flg = false;
 			return std::make_unique<SceneTitle>();
 		}
 	}

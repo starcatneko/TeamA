@@ -4,6 +4,7 @@
 #include <map>
 
 class Board;
+class Player;
 class Card;
 
 
@@ -19,11 +20,13 @@ public:
 	Scene Update(Scene own);
 	bool Draw();
 	bool GoalEffect();
-	bool Effect(std::map<int,std::string>);
+	bool Fade_in();
+	bool Effect();
 
 private:
 	std::unique_ptr<Card> card;
 	std::shared_ptr<Board> board;
+	std::unique_ptr<Player> player;
 	// アニメーション処理等で使うカウンター
 	UINT anim_cnt;
 };

@@ -5,6 +5,7 @@
 #include "VECTOR2.h"
 #include "Dxlib.h"
 #include "Card.h"
+#include "Player.h"
 
 #include <memory>
 
@@ -24,12 +25,15 @@ void SceneMain::Init()
 	//card = std::make_unique<Card>(VECTOR2{ 2,2 }, SUIT_HEART, 12);
 	// boardのコンストラクタに引数を渡さない場合、BOARD_DEF_TROUT_XとBOARD_DEF_TROUT_Yが渡される
 	board = std::make_shared<Board>();
-	//player.pos = BOARD_START;
+	//player = std::make_unique<Player>(pos,suit,num);
+	//player->SetPos(BOARD_START);
 	//盤面、Player等初期化処理
 }
 
 Scene SceneMain::Update(Scene own)
 {
+
+
 	/*
 	// 1～3のいずれかのキーを押しながら方向キーを押した時に、
 	// 入力された方向に入力された番号のストックのカードを設置する
@@ -37,12 +41,16 @@ Scene SceneMain::Update(Scene own)
 	{
 		if(方向キー入力)
 		{
-			Board::ストック設置(方向,ストックの番号);
+			int dirVec = 
+			Board::SetBoard(Plyaer.Pos+方向,stockSuit,stockNum);
 		}
 	}
 	else if(方向キー入力)
 	{
+	// 移動前のマスを移動不可マスにする
+		auto tmp = make_shared<Card>(Player::GetPos(),Player::GetSuit(),0);
 		Player::移動(方向);
+		Board::SetBoard(tmp);
 	}
 	*/
 	board->Update();
@@ -67,6 +75,7 @@ Scene SceneMain::Update(Scene own)
 	{
 		if (GoalEffect() == true)
 		{
+			flg = false;
 			return std::make_unique<SceneResult>();
 		}
 
@@ -81,22 +90,6 @@ bool SceneMain::Draw()
 	 lpGameTask.player->描画();
 	*/
 
-	/*
-	int BOARD_DIS_X = 64;
-	int BOARD_DIS_Y = 64;
-	int CHIPSIZE = 48;
-		for (int x = 0; x < BOARD_DEF_TROUT_X; x++)
-		{
-			for (int y = 0; y < BOARD_DEF_TROUT_Y; y++)
-			{
-				int forx = BOARD_DIS_X + x * CHIPSIZE;
-				int fory = BOARD_DIS_Y + y * CHIPSIZE;
-				DrawBox(forx, fory,
-					forx + CHIPSIZE, fory + CHIPSIZE,
-					0x00FF00, false);
-			}
-		}
-		*/
 	DrawString(0, 0, "Main", 0x888888);	
 	return false;
 }
@@ -120,4 +113,4 @@ bool SceneMain::GoalEffect()
 		}
 	}
 	return false;
-};
+}
