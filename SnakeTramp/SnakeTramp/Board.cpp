@@ -6,19 +6,43 @@
 
 void Board::Update(void)
 {
+	for (int x = 0; x < troutCnt.x + 1; x++)
+	{
+		DrawLine(x * TROUT_SIZE + 180, 80, x * TROUT_SIZE + 180, 80 + 60 * 7, 0xffffff);
+	}
+	for (int y = 0; y < troutCnt.y + 1; y++)
+	{
+		DrawLine(180,y * TROUT_SIZE + 80, 180 + 60 * 7, y * TROUT_SIZE + 80, 0xffffff);
+	}
 	PushTrout();
-	DrawString(50, 0, DebugChar, GetColor(255, 255, 255));
+	DrawString(50, 0, DebugChar, 0xffffff);
 }
 
-bool Board::CheckBoard(VECTOR2 pos)
+bool Board::CheckBoard(VECTOR2 pos, int moveDirection)
 {
-	for (pPos.y -1; pPos.y < pPos.y + 1; pPos.y++)
+	switch (moveDirection)
 	{
-		for (pPos.x - 1; pPos.x < pPos.x + 1; pPos.x++)
-		{
-
-		}
+	case DIR_UP:
+		break;
+	case DIR_RIGHT:
+		break;
+	case DIR_DOWN:
+		break;
+	case DIR_LEFT:
+		break;
+	default:
+		break;
 	}
+	/*for (int y = 0; y < troutCnt.y; y++)
+	{
+		for (int x = 0; x < troutCnt.x; x++)
+		{
+			if (data[y][x].expired())
+			{
+				int a = 0;
+			}
+		}
+	}*/
 	return false;
 }
 
@@ -48,11 +72,6 @@ void Board::PushTrout(void)
 		ckPos = pPos + VECTOR2(-1,0);
 		DebugChar = "¶";
 	}
-}
-
-bool Board::SetBoard(VECTOR2 pos)
-{
-	return false;
 }
 
 Board::Board()
