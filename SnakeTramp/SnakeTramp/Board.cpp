@@ -18,6 +18,23 @@ void Board::Update(void)
 	DrawString(50, 0, DebugChar, 0xffffff);
 }
 
+void Board::SetBoard(card_shared card)
+{
+	data[card->GetPos().y][card->GetPos().x] = card;
+}
+
+card_weak Board::GetBoard(VECTOR2 pos)
+{
+	if (!suit.empty())
+	{
+		if (*suit.begin())
+		{
+			return data[pos.y][pos.x];
+		}
+	}
+	return SUIT_NON;
+}
+
 bool Board::CheckBoard(VECTOR2 pos, int moveDirection)
 {
 	switch (moveDirection)
@@ -33,16 +50,6 @@ bool Board::CheckBoard(VECTOR2 pos, int moveDirection)
 	default:
 		break;
 	}
-	/*for (int y = 0; y < troutCnt.y; y++)
-	{
-		for (int x = 0; x < troutCnt.x; x++)
-		{
-			if (data[y][x].expired())
-			{
-				int a = 0;
-			}
-		}
-	}*/
 	return false;
 }
 
@@ -51,27 +58,31 @@ void Board::PushTrout(void)
 	if (lpGameTask.PressKey(KEY_INPUT_UP))
 	{
 		moveDirection = DIR_UP;
-		ckPos = pPos + VECTOR2(0, 1);
 		DebugChar = "ã";
 	}
 	else if (lpGameTask.PressKey(KEY_INPUT_RIGHT))
 	{
 		moveDirection = DIR_RIGHT;
-		ckPos = pPos + VECTOR2(1,0);
 		DebugChar = "‰E";
 	}
 	else if (lpGameTask.PressKey(KEY_INPUT_DOWN))
 	{
 		moveDirection = DIR_DOWN;
-		ckPos = pPos + VECTOR2(0, -1);
 		DebugChar = "‰º";
 	}
 	else if (lpGameTask.PressKey(KEY_INPUT_LEFT))
 	{
 		moveDirection = DIR_LEFT;
-		ckPos = pPos + VECTOR2(-1,0);
 		DebugChar = "¶";
 	}
+}
+
+auto Board::AddObjList(card_shared && objPtr)
+{
+	cardList.push_back(objPtr);
+	auto itr = cardList.end();
+	itr--;
+	return itr;
 }
 
 Board::Board()
@@ -79,6 +90,8 @@ Board::Board()
 	troutCnt = VECTOR2(BOARD_DEF_TROUT_X, BOARD_DEF_TROUT_Y);
 	moveDirection = DIR_RIGHT;
 	pPos = BOARD_START;
+	screenSize = VECTOR2(800, 600);
+	boardLT = VECTOR2(((screenSize.x - (TROUT_SIZE * boardSize.x)) / 2), ((screenSize.y - (TROUT_SIZE * boardSize.y)) / 2));
 }
 
 Board::Board(VECTOR2 troutCnt)
