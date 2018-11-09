@@ -65,7 +65,11 @@ bool Board::Resize(VECTOR2 vec)
 	}
 	
 	screenSize = VECTOR2(800, 600);
+<<<<<<< HEAD
 	boardLT = VECTOR2(((screenSize.x - (TROUT_SIZE * boardSize.x)) / 2),
+=======
+	boardLT = VECTOR2(((screenSize.x - (TROUT_SIZE * boardSize.x)) / 2), 
+>>>>>>> MInt
 						((screenSize.y - (TROUT_SIZE * boardSize.y)) / 2));
 
 	return true;
