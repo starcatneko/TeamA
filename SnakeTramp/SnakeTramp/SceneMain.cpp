@@ -86,8 +86,18 @@ Scene SceneMain::Update(Scene own)
 		// board->SetBoard(tmp);
 
 
+		int  tmp_num;
+		int tmp_suit;
+		if( 
+			board->GetNumber(player->GetPos() / 60) + player->GetNumber();
 		player->SetSuit(board->GetSuit(player->GetPos() / 60));
-		player->SetNumber(board->GetNumber(player->GetPos() / 60));
+
+
+
+
+		player->SetNumber();
+
+
 	}
 	
 	board->Update();
@@ -132,13 +142,12 @@ bool SceneMain::Draw()
 	{
 		for (int y = 1; y < BOARD_DEF_TROUT_Y; y++)
 		{
-			/*
-					auto tmp = (board->GetBoard(VECTOR2{ x,y }));
-					tmp.lock()->Draw();
-					*/
+			
+				auto tmp = (board->GetBoard(VECTOR2{ x,y }));
+				tmp.lock()->Draw();
+			
 		}
 	}
-	if(!card.expired())card.lock()->Draw();
 
 	DrawString(0, 0, "Main", 0x888888);	
 	// Board::•`‰æ();

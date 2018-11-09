@@ -116,12 +116,13 @@ void Board::Draw(void)
 			VECTOR2 *cPos = 0;
 			CARD_SUIT *cSuit = 0;
 			int *number = 0;
-			VEC_INT image;
+			VEC_INT image;/*
+			if (data[y][x].expired()) continue;
 			*cPos = data[y][x].lock()->GetPos();
 			*cSuit = data[y][x].lock()->GetSuit();
 			*number = data[y][x].lock()->GetNum();
 
-			card = std::make_unique<Card>(*cPos, *cSuit, *number);
+			card = std::make_unique<Card>(*cPos, *cSuit, *number);*/
 		}
 	}
 
