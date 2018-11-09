@@ -16,5 +16,7 @@ public:
 	std::shared_ptr<Board> board;
 	bool Draw();
 
+	bool Effect();
+
 };
 

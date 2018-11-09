@@ -30,15 +30,20 @@ card_weak Board::GetBoard(VECTOR2 pos)
 		}
 	}
 	return data[pos.y][pos.x];
+	//return SUIT_NON;
+	return data[0][0];
 }
 
 CARD_SUIT Board::GetSuit(VECTOR2 pos)
 {
+	//return SUIT_DIA;
+	auto tmp = data[pos.y][pos.x].lock()->GetSuit();
 	return data[pos.y][pos.x].lock()->GetSuit();
 }
 
 int Board::GetNumber(VECTOR2 pos)
 {
+	//return 12;
 	return data[pos.y][pos.x].lock()->GetNum();
 }
 
@@ -125,12 +130,13 @@ void Board::Draw(void)
 	DrawString(50, 0, DebugChar, 0xffffff);
 }
 
-auto Board::AddObjList(card_shared && objPtr)
+std::shared_ptr<Card> Board::AddObjList(card_shared && objPtr)
 {
 	cardList.push_back(objPtr);
+
 	auto itr = cardList.end();
 	itr--;
-	return itr;
+	return *itr;
 }
 
 Board::Board()

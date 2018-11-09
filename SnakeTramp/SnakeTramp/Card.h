@@ -5,6 +5,7 @@
 
 // カードのスート（柄）用
 enum CARD_SUIT {
+	SUIT_NON,
 	SUIT_SPADE,
 	SUIT_CRUB,
 	SUIT_DIA,
@@ -21,7 +22,7 @@ public:
 	~Card();
 	// インライン展開のほうが処理が速いので使用
 	// スート取得
-	const CARD_SUIT &GetSuit() {
+	CARD_SUIT GetSuit() {
 		return suit;
 	}
 	// スート格納
@@ -29,7 +30,7 @@ public:
 		this->suit = suit;
 	}
 	// 番号取得
-	const int &GetNum() {
+	int GetNum() {
 		return number;
 	}
 	// 番号格納
@@ -37,7 +38,7 @@ public:
 		this->number = number;
 	}
 	// 座標取得
-	const VECTOR2 &GetPos() {
+	VECTOR2 GetPos() {
 		return pos;
 	}
 	// 座標格納
