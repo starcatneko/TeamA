@@ -32,7 +32,7 @@ void SceneMain::Init()
 	{
 		for (int y = 0; y < BOARD_DEF_TROUT_Y; y++)
 		{
-			int num = GetRand(13);
+			int num = GetRand(12)+1;
 			CARD_SUIT suit = CARD_SUIT(GetRand(3) + 1);
 
 			if (x < 2 && y <= 1)
@@ -56,7 +56,7 @@ void SceneMain::Init()
 Scene SceneMain::Update(Scene own)
 {
 	//card_u->Draw();
-	
+	/*
 	// 1～3のいずれかのキーを押しながら方向キーを押した時に、
 	// 入力された方向に入力された番号のストックのカードを設置する
 	if (CheckHitKey(KEY_INPUT_1) ||
@@ -72,12 +72,15 @@ Scene SceneMain::Update(Scene own)
 			// auto dirVec[] = { {0,-1},{1,0},{0,1},{-1,0} };
 			//Board::SetBoard(Plyaer.Pos+方向,stockSuit,stockNum);
 		}
-	}
-	
-	else if(lpGameTask.PressKey(KEY_INPUT_W) ||
-		lpGameTask.PressKey(KEY_INPUT_D) ||
-		lpGameTask.PressKey(KEY_INPUT_S) ||
-		lpGameTask.PressKey(KEY_INPUT_A))
+	}else 
+		*/
+
+	int i;
+
+		if(lpGameTask.PressKey(i = KEY_INPUT_W) ||
+		lpGameTask.PressKey(i = KEY_INPUT_D) ||
+		lpGameTask.PressKey(i = KEY_INPUT_S) ||
+		lpGameTask.PressKey(i = KEY_INPUT_A))
 	{
 	// 移動前のマスを移動不可マスにする
 		// auto tmp = make_shared<Card>(player->GetPos(),,0);
@@ -86,8 +89,20 @@ Scene SceneMain::Update(Scene own)
 		// board->SetBoard(tmp);
 
 
-		player->SetSuit(board->GetSuit(player->GetPos() / 60));
+		//int  tmp_num;
+		//int tmp_suit;
+		//	board->GetNumber(player->GetPos() / 60) + player->GetNumber()
+
+			if (i == KEY_INPUT_W) player->Update(DIR_UP);
+			if (i == KEY_INPUT_A) player->Update(DIR_LEFT);
+			if (i == KEY_INPUT_S) player->Update(DIR_DOWN);
+			if (i == KEY_INPUT_D) player->Update(DIR_RIGHT);
+
+		
 		player->SetNumber(board->GetNumber(player->GetPos() / 60));
+		player->SetSuit(board->GetSuit(player->GetPos() / 60));
+
+
 	}
 	
 	board->Update();
@@ -133,13 +148,12 @@ bool SceneMain::Draw()
 	{
 		for (int y = 1; y < BOARD_DEF_TROUT_Y; y++)
 		{
-			/*
-					auto tmp = (board->GetBoard(VECTOR2{ x,y }));
-					tmp.lock()->Draw();
-					*/
+			
+				auto tmp = (board->GetBoard(VECTOR2{ x,y }));
+				tmp.lock()->Draw();
+			
 		}
 	}
-	if(!card.expired())card.lock()->Draw();
 
 	DrawString(0, 0, "Main", 0x888888);	
 	// Board::描画();
