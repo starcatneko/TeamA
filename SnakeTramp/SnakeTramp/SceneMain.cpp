@@ -24,6 +24,13 @@ void SceneMain::Init()
 	
 	// boardのコンストラクタに引数を渡さない場合、BOARD_DEF_TROUT_XとBOARD_DEF_TROUT_Yが渡される
 	board = std::make_shared<Board>();
+<<<<<<< HEAD
+=======
+	// player(初期座標, 初期サイズ, 初期所持スート, 初期所持数字)
+	player = std::make_unique<Player>( BOARD_START, VECTOR2( TROUT_SIZE, TROUT_SIZE), SUIT_SPADE, 1);
+	// cardの生成
+	card = std::make_unique<Card>(VECTOR2( 0, 100), player->GetSuit(), player->GetNumber());
+>>>>>>> master
 
 	for (int x = 1; x < BOARD_DEF_TROUT_X; x++)
 	{
@@ -79,7 +86,12 @@ Scene SceneMain::Update(Scene own)
 	}
 	
 	board->Update();
+<<<<<<< HEAD
 	
+=======
+	// playerの挙動制御
+	player->Update();
+>>>>>>> master
 
 	/*
 	if(player.pos == BOARD_DEF_GOAL ||
@@ -111,6 +123,7 @@ Scene SceneMain::Update(Scene own)
 
 bool SceneMain::Draw()
 {
+<<<<<<< HEAD
 	/*
 	 board->描画(); // card->Draw()
 	 lpGameTask.player->描画();
@@ -128,6 +141,16 @@ bool SceneMain::Draw()
 	if(!card.expired())card.lock()->Draw();
 
 	DrawString(0, 0, "Main", 0x888888);	
+=======
+	// Board::描画();
+	// Player::描画();
+	player->Draw();
+	//(*card).Draw();
+	card->Draw();
+
+	DrawString(0, 0, "Main", 0x888888);
+	
+>>>>>>> master
 	return false;
 }
 

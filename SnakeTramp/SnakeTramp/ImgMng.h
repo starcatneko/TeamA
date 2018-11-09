@@ -17,6 +17,8 @@ public:
 	}
 	const VEC_INT& GetID(std::string f_name);
 	const VEC_INT& GetID(std::string f_name, VECTOR2 diveSize, VECTOR2 divCnt, VECTOR2 chipOffset);
+	// mikio‚ªì‚Á‚½
+	int Load(std::string fileName);
 private:
 	struct ImgMngDeleter
 	{
@@ -31,5 +33,7 @@ private:
 	static std::unique_ptr<ImgMng,ImgMngDeleter> s_Instance;
 
 	std::map<std::string,VEC_INT> imgMap;	
+	// mikio‚ªì‚Á‚½
+	std::map<std::string, int> imageData;
 };
 

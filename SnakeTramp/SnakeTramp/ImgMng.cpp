@@ -30,3 +30,11 @@ ImgMng::~ImgMng()
 	 }
 	 return imgMap[f_name]; //f_name‚Ì‰æ‘œID‚ÌÊÝÄÞÙ‚ð•Ô‚·
  }
+
+ int ImgMng::Load(std::string fileName)
+ {
+	 if (imageData.find(fileName) == imageData.end()){ 
+		imageData[fileName] = LoadGraph(fileName.c_str());
+	}
+	return imageData[fileName];
+ }

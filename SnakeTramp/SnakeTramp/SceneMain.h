@@ -6,6 +6,7 @@
 class Board;
 class Player;
 class Card;
+class Player;
 
 
 #define GOAL_EFFECT_TIME (180)			//ゴール時に行う演出のフレーム数
@@ -27,7 +28,10 @@ private:
 	std::weak_ptr<Card> card;
 	std::shared_ptr<Board> board;
 	std::unique_ptr<Player> player;
+<<<<<<< HEAD
 	// アニメーション処理等で使うカウンター
 	UINT anim_cnt;
+=======
+>>>>>>> master
 };
 
