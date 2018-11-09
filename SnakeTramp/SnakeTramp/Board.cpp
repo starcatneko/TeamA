@@ -6,6 +6,10 @@
 
 void Board::Update(void)
 {
+	if (lpGameTask.PressKey(KEY_INPUT_SPACE))
+	{
+		score++;
+	}
 	Draw();
 	PushTrout();
 }
@@ -98,6 +102,8 @@ void Board::Draw(void)
 		DrawLine(180, y * TROUT_SIZE + 80, 180 + 60 * 7, y * TROUT_SIZE + 80, 0xffffff);
 	}
 
+	DrawFormatString(700, 0, 0xffffff, "score = %d", score);
+
 	DrawString(50, 0, DebugChar, 0xffffff);
 }
 
@@ -114,6 +120,7 @@ Board::Board()
 	troutCnt = VECTOR2(BOARD_DEF_TROUT_X, BOARD_DEF_TROUT_Y);
 	Resize(troutCnt);
 	moveDirection = DIR_RIGHT;
+	score = 0;
 	pPos = BOARD_START;	
 }
 
@@ -121,6 +128,7 @@ Board::Board(VECTOR2 troutCnt)
 {
 	this->troutCnt = troutCnt;
 	Resize(this->troutCnt);
+	score = 0;
 }
 
 

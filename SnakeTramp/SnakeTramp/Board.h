@@ -67,5 +67,7 @@ private:
 
 	const TCHAR *DebugChar = "‰E";		// ÃÞÊÞ¯¸Þ—p•¶Žš—ñ
 
+	int score;
+
 };
 
