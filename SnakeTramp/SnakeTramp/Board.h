@@ -57,13 +57,11 @@ private:
 	VECTOR2 troutCnt;
 	VECTOR2 pPos;		// ÌßÚ²Ô°‚ÌPos
 	VECTOR2 ckPos;		// ˆÚ“®‚·‚é—\’è‚ÌPos
-
-
 	VECTOR2 screenSize;
 	VECTOR2 boardSize;
 	VECTOR2 boardLT;
 
-	cardST_unique card;
+	card_shared card;
 
 	card_sharedList cardList;
 	cardST_uniqueList suit;
