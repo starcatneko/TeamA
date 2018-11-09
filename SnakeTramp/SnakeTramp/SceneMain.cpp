@@ -22,10 +22,28 @@ void SceneMain::Init()
 	// 万が一Boardのunique_ptrが初期化されていなかった場合resetをする
 	if (board) board.reset();
 	
-	//card = std::make_unique<Card>(VECTOR2{ 2,2 }, SUIT_HEART, 12);
 	// boardのコンストラクタに引数を渡さない場合、BOARD_DEF_TROUT_XとBOARD_DEF_TROUT_Yが渡される
 	board = std::make_shared<Board>();
 
+	for (int x = 1; x < BOARD_DEF_TROUT_X; x++)
+	{
+		for (int y = 0; y < BOARD_DEF_TROUT_Y; y++)
+		{
+			int num = GetRand(13);
+			CARD_SUIT suit = CARD_SUIT(GetRand(3) + 1);
+
+			if (x < 2 && y <= 1)
+			{
+				while (num < 5)
+				{
+					num = GetRand(13);
+				}
+			}
+			auto tmp = make_shared<Card>(VECTOR2{ x,y }, suit, num);
+			board->SetBoard(tmp);
+
+		}
+	}
 	//player = std::make_unique<Player>(pos,suit,num);
 	//player->SetPos(BOARD_START);
 	//盤面、Player等初期化処理
@@ -34,17 +52,22 @@ void SceneMain::Init()
 Scene SceneMain::Update(Scene own)
 {
 
-
-	/*
+	
 	// 1～3のいずれかのキーを押しながら方向キーを押した時に、
 	// 入力された方向に入力された番号のストックのカードを設置する
-	if (1~3のいずれかが入力中)
+	if (CheckHitKey(KEY_INPUT_1) ||
+		CheckHitKey(KEY_INPUT_2) ||
+		CheckHitKey(KEY_INPUT_3))
 	{
-		if(方向キー入力)
+		if(lpGameTask.PressKey(
+			KEY_INPUT_UP ||
+			KEY_INPUT_RIGHT ||
+			KEY_INPUT_DOWN ||
+			KEY_INPUT_LEFT
+		)
 		{
-			{x,y}
 			auto dirVec = {{0,-1},{1,0},{0,1},{-1,0}};
-			Board::SetBoard(Plyaer.Pos+方向,stockSuit,stockNum);
+			//Board::SetBoard(Plyaer.Pos+方向,stockSuit,stockNum);
 		}
 	}
 	else if(方向キー入力)
@@ -54,10 +77,9 @@ Scene SceneMain::Update(Scene own)
 		Player::移動(方向);
 		Board::SetBoard(tmp);
 	}
-	*/
+	
 	board->Update();
-	board->SetBoard(std::make_shared<Card>(VECTOR2{ 4,2 }, SUIT_DIA, 10));
-	board->GetBoard({ 4,2 });
+	
 
 	/*
 	if(player.pos == BOARD_DEF_GOAL ||
@@ -93,6 +115,17 @@ bool SceneMain::Draw()
 	 board->描画(); // card->Draw()
 	 lpGameTask.player->描画();
 	*/
+
+	for (int x = 1; x < BOARD_DEF_TROUT_X; x++)
+	{
+		for (int y = 0; y < BOARD_DEF_TROUT_Y; y++)
+		{
+			
+		//			weak_ptr<Card> tmp = board->GetBoard(VECTOR2{ x,y });
+		//			tmp.lock()->GetPos();
+		}
+	}
+	if(!card.expired())card.lock()->Draw();
 
 	DrawString(0, 0, "Main", 0x888888);	
 	return false;

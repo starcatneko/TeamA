@@ -24,7 +24,7 @@ public:
 	bool Effect();
 
 private:
-	std::unique_ptr<Card> card;
+	std::weak_ptr<Card> card;
 	std::shared_ptr<Board> board;
 	std::unique_ptr<Player> player;
 	// アニメーション処理等で使うカウンター
