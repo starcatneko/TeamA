@@ -38,7 +38,13 @@ public:
 	void SetBoard(card_shared card);
 	card_weak GetBoard(VECTOR2 pos);
 
+	CARD_SUIT GetSuit(VECTOR2 pos);
+	int GetNumber(VECTOR2 pos);
+
 	void PushTrout(void);
+	void Draw(void);
+
+	int score;
 private:
 	auto AddObjList(card_shared && objPtr);
 
@@ -47,8 +53,6 @@ private:
 
 	bool CheckBoard(VECTOR2 pos, int moveDirection);
 	bool Resize(VECTOR2 vec);
-
-	bool changeFlag;
 
 	VECTOR2 troutCnt;
 	VECTOR2 pPos;		// ÌßÚ²Ô°‚ÌPos
@@ -66,6 +70,5 @@ private:
 	int moveDirection;
 
 	const TCHAR *DebugChar = "‰E";		// ÃÞÊÞ¯¸Þ—p•¶Žš—ñ
-
 };
 

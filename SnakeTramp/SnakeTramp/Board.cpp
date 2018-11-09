@@ -6,16 +6,12 @@
 
 void Board::Update(void)
 {
-	for (int x = 0; x < troutCnt.x + 1; x++)
+	if (lpGameTask.PressKey(KEY_INPUT_SPACE))
 	{
-		DrawLine(x * TROUT_SIZE + 180, 80, x * TROUT_SIZE + 180, 80 + 60 * 7, 0xffffff);
+		score++;
 	}
-	for (int y = 0; y < troutCnt.y + 1; y++)
-	{
-		DrawLine(180,y * TROUT_SIZE + 80, 180 + 60 * 7, y * TROUT_SIZE + 80, 0xffffff);
-	}
+	Draw();
 	PushTrout();
-	DrawString(50, 0, DebugChar, 0xffffff);
 }
 
 void Board::SetBoard(card_shared card)
@@ -33,9 +29,22 @@ card_weak Board::GetBoard(VECTOR2 pos)
 		}
 	}
 	return data[pos.y][pos.x];
+<<<<<<< HEAD
 
 	//return SUIT_NON;
 	return data[0][0];
+=======
+}
+
+CARD_SUIT Board::GetSuit(VECTOR2 pos)
+{
+	return data[pos.y][pos.x].lock()->GetSuit();
+}
+
+int Board::GetNumber(VECTOR2 pos)
+{
+	return data[pos.y][pos.x].lock()->GetNum();
+>>>>>>> master
 }
 
 bool Board::CheckBoard(VECTOR2 pos, int moveDirection)
@@ -98,6 +107,21 @@ void Board::PushTrout(void)
 	}
 }
 
+void Board::Draw(void)
+{
+	for (int y = 0; y < 7; y++)
+	{
+		for (int x = 0; x < 7; x++)
+		{
+			VECTOR2 cPos;
+		}
+	}
+
+	DrawFormatString(700, 0, 0xffffff, "score = %d", score);
+
+	DrawString(50, 0, DebugChar, 0xffffff);
+}
+
 auto Board::AddObjList(card_shared && objPtr)
 {
 	cardList.push_back(objPtr);
@@ -111,6 +135,7 @@ Board::Board()
 	troutCnt = VECTOR2(BOARD_DEF_TROUT_X, BOARD_DEF_TROUT_Y);
 	Resize(troutCnt);
 	moveDirection = DIR_RIGHT;
+	score = 0;
 	pPos = BOARD_START;	
 }
 
@@ -118,6 +143,7 @@ Board::Board(VECTOR2 troutCnt)
 {
 	this->troutCnt = troutCnt;
 	Resize(this->troutCnt);
+	score = 0;
 }
 
 
