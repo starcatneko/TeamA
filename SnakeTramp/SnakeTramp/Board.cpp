@@ -53,6 +53,22 @@ bool Board::CheckBoard(VECTOR2 pos, int moveDirection)
 	return false;
 }
 
+bool Board::Resize(VECTOR2 vec)
+{
+	baseData.resize(vec.y * vec.x);
+
+	data.resize(vec.y);
+
+	for (unsigned int j = 0; j < data.size(); j++)
+	{
+		data[j] = &baseData[j * vec.x];
+	}
+
+
+	screenSize = VECTOR2(800, 600);
+	boardLT = VECTOR2(((screenSize.x - (TROUT_SIZE * boardSize.x)) / 2), ((screenSize.y - (TROUT_SIZE * boardSize.y)) / 2));
+}
+
 void Board::PushTrout(void)
 {
 	if (lpGameTask.PressKey(KEY_INPUT_UP))
@@ -88,15 +104,15 @@ auto Board::AddObjList(card_shared && objPtr)
 Board::Board()
 {
 	troutCnt = VECTOR2(BOARD_DEF_TROUT_X, BOARD_DEF_TROUT_Y);
+	Resize(troutCnt);
 	moveDirection = DIR_RIGHT;
-	pPos = BOARD_START;
-	screenSize = VECTOR2(800, 600);
-	boardLT = VECTOR2(((screenSize.x - (TROUT_SIZE * boardSize.x)) / 2), ((screenSize.y - (TROUT_SIZE * boardSize.y)) / 2));
+	pPos = BOARD_START;	
 }
 
 Board::Board(VECTOR2 troutCnt)
 {
 	this->troutCnt = troutCnt;
+	Resize(this->troutCnt);
 }
 
 
