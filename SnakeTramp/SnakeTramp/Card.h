@@ -21,7 +21,7 @@ public:
 	~Card();
 	// インライン展開のほうが処理が速いので使用
 	// スート取得
-	CARD_SUIT GetSuit() {
+	const CARD_SUIT &GetSuit() {
 		return suit;
 	}
 	// スート格納
@@ -29,7 +29,7 @@ public:
 		this->suit = suit;
 	}
 	// 番号取得
-	int GetNum() {
+	const int &GetNum() {
 		return number;
 	}
 	// 番号格納
@@ -37,7 +37,7 @@ public:
 		this->number = number;
 	}
 	// 座標取得
-	VECTOR2 GetPos() {
+	const VECTOR2 &GetPos() {
 		return pos;
 	}
 	// 座標格納

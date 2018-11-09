@@ -5,8 +5,8 @@
 Card::Card()
 {
 	Reset();
-	//image.resize(1);	// vectorの使用範囲を指定
-	//Load("");			// 読み込む画像がないため、わざと空白にしている
+	image.resize(1);	// vectorの使用範囲を指定
+	Load("trump.png");			// 読み込む画像がないため、わざと空白にしている
 	pos = { 0,0 };
 	suit = SUIT_NUM;
 	number = 0;
@@ -15,8 +15,8 @@ Card::Card()
 Card::Card(VECTOR2 pos, CARD_SUIT suit, int number)
 {
 	Reset();
-	//image.resize(1);	// vectorの使用範囲を指定
-	//Load("");			// 読み込む画像がないため、わざと空白にしている
+	image.resize(1);	// vectorの使用範囲を指定
+	Load("trump.png");			// 読み込む画像がないため、わざと空白にしている
 	this->pos = pos;
 	this->suit = suit;
 	this->number = number;
@@ -29,6 +29,8 @@ Card::~Card()
 
 void Card::Draw()
 {
+	// カードのサイズ
+	VECTOR2 size = {50,75};
 	int num = 0;
 	// 絵柄
 	if (suit == SUIT_SPADE) DrawString(pos.x, pos.y, "スペード ", SetColor(suit));
@@ -39,11 +41,21 @@ void Card::Draw()
 	if (suit == SUIT_SPADE) num = 80;
 	else num = 60;
 	DrawFormatString(pos.x + num, pos.y, SetColor(suit),"%d",number);
+	// 画像
+	DrawRectRotaGraph2(
+		pos.x + (size.x / 2),pos.y + (size.y / 2),
+		size.x * suit, size.y * (number - 1),
+		size.x,size.y,
+		(size.x / 2),(size.y / 2),
+		1.0f,0.0f,
+		image[0],
+		true,false
+	);
 }
 
 void Card::Load(std::string fileName)
 {
-	//image = lpImgMng.GetID(fileName + ".png");
+	image[0] = lpImgMng.Load("../Assets/Image/" + fileName);
 }
 
 unsigned int Card::SetColor(CARD_SUIT suit)
