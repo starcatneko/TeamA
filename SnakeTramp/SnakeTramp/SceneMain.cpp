@@ -23,11 +23,12 @@ void SceneMain::Init()
 	// 万が一Boardのunique_ptrが初期化されていなかった場合resetをする
 	if (board) board.reset();
 	
-	//card = std::make_unique<Card>(VECTOR2{ 2,2 }, SUIT_HEART, 12);
 	// boardのコンストラクタに引数を渡さない場合、BOARD_DEF_TROUT_XとBOARD_DEF_TROUT_Yが渡される
 	board = std::make_shared<Board>();
 	// player(初期座標, 初期サイズ, 初期所持スート, 初期所持数字)
 	player = std::make_unique<Player>( BOARD_START, VECTOR2( TROUT_SIZE, TROUT_SIZE), SUIT_SPADE, 1);
+	// cardの生成
+	card = std::make_unique<Card>(VECTOR2( 0, 100), player->GetSuit(), player->GetNumber());
 
 	//盤面、Player等初期化処理
 }
@@ -69,6 +70,8 @@ bool SceneMain::Draw()
 	// Player::描画();
 	player->Draw();
 	//(*card).Draw();
+	card->Draw();
+
 	DrawString(0, 0, "Main", 0x888888);
 	
 	return false;
