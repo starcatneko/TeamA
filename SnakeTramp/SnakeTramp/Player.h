@@ -6,12 +6,19 @@
 enum CARD_SUIT;
 enum DIR;
 
+class Card;
+class Board;
+
 class Player
 {
 public:
 	Player( VECTOR2 pos, VECTOR2 size, CARD_SUIT suit, int number);
 	~Player();
-	void Update();
+	// 行動制御(デバッグ用)
+	void Update(Card &card);
+	// 行動制御(Dirのみ)
+	void Update(DIR dir);
+	// 描画
 	void Draw();
 	// 座標取得
 	const VECTOR2 &GetPos() {
@@ -51,6 +58,10 @@ private:
 	void Key();
 	// 移動処理
 	void Move();
+	// 移動処理(Dir制御)
+	void Move(DIR dir);
+	// スート・数字の切り替え
+	void Change(Card & card);
 	// 画像読み込み
 	void Load(std::string fileName);
 	// メモリ初期化・解放

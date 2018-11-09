@@ -44,7 +44,7 @@ void Card::Draw()
 	// ‰æ‘œ
 	DrawRectRotaGraph2(
 		pos.x + (size.x / 2),pos.y + (size.y / 2),
-		size.x * suit, size.y * (number - 1),
+		size.x * (CARD_SUIT)(suit - 1), size.y * (number - 1),
 		size.x,size.y,
 		(size.x / 2),(size.y / 2),
 		1.0f,0.0f,

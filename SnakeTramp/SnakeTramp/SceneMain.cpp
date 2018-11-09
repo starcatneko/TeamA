@@ -82,7 +82,7 @@ Scene SceneMain::Update(Scene own)
 	// 移動前のマスを移動不可マスにする
 		// auto tmp = make_shared<Card>(player->GetPos(),,0);
 		 //AddObjList(tmp);
-		player->Update();
+		
 		// board->SetBoard(tmp);
 
 
@@ -92,6 +92,7 @@ Scene SceneMain::Update(Scene own)
 	
 	board->Update();
 	// playerの挙動制御
+	//player->Update(*card_u);
 
 	/*
 	if(player.pos == BOARD_DEF_GOAL ||

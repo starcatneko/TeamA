@@ -21,10 +21,16 @@ Player::~Player()
 	Reset();
 }
 
-void Player::Update()
+void Player::Update(Card &card)
 {
 	Key();
 	Move();
+	Change(card);
+}
+
+void Player::Update(DIR dir)
+{
+	Move(dir);
 }
 
 void Player::Draw()
@@ -37,10 +43,10 @@ void Player::Draw()
 	DrawFormatString(0/*pos.x*/, 30/*pos.y - 45*/, 0xffffff, "pos.x = %d", pos.x);
 	DrawFormatString(0/*pos.x*/, 45/*pos.y - 30*/, 0xffffff, "pos.y = %d", pos.y);
 	DrawFormatString(pos.x,pos.y - 30, 0xff9e3d, "%d", number);
-
+	// アニメーションカウント
 	if (animCnt >= 0) animCnt++;
 	if (animCnt > 38) animCnt = 0;
-
+	// 描画
 	DrawRectRotaGraph2(
 		pos.x + (size.x / 2), pos.y + (size.y / 2),
 		size.x * (animCnt / 20),size.y * dir,
@@ -82,6 +88,47 @@ void Player::Move()
 		pos.x -= size.x;
 		dir = DIR_LEFT;
 	}
+}
+
+void Player::Move(DIR dir)
+{
+	//上
+	if (dir == DIR_UP) {
+		pos.y -= size.y;
+		dir = DIR_UP;
+	}
+	//右
+	if (dir == DIR_RIGHT) {
+		pos.x += size.x;
+		dir = DIR_RIGHT;
+	}
+	//下
+	if (dir == DIR_DOWN) {
+		pos.y += size.y;
+		dir = DIR_DOWN;
+	}
+	//左
+	if (dir == DIR_LEFT) {
+		pos.x -= size.x;
+		dir = DIR_LEFT;
+	}
+}
+
+void Player::Change(Card & card)
+{
+	// スート切り替え
+	if (keyData[KEY_INPUT_E] && !keyDataOld[KEY_INPUT_E]) {
+		suit = (CARD_SUIT)(suit + 1);
+		if (suit > (CARD_SUIT)(SUIT_NUM - 1)) suit = SUIT_SPADE;
+	}
+	card.SetSuit(suit);
+
+	// 数字切り替え
+	if (keyData[KEY_INPUT_Q] && !keyDataOld[KEY_INPUT_Q]) {
+		number += 1;
+		if (number > 13) number = 1;
+	}
+	card.SetNum(number);
 }
 
 void Player::Load(std::string fileName)
