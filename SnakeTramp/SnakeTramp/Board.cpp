@@ -113,15 +113,17 @@ void Board::Draw(void)
 	{
 		for (int x = 0; x < 7; x++)
 		{
-			VECTOR2 *cPos = 0;
-			CARD_SUIT *cSuit = 0;
-			int *number = 0;
+			VECTOR2 cPos;
+			CARD_SUIT cSuit;
+			int number = 0;
 			VEC_INT image;
-			*cPos = data[y][x].lock()->GetPos();
-			*cSuit = data[y][x].lock()->GetSuit();
-			*number = data[y][x].lock()->GetNum();
-
-			card = std::make_unique<Card>(*cPos, *cSuit, *number);
+			if (data[y][x].expired())
+			{
+				continue;
+			}
+			cPos = data[y][x].lock()->GetPos();
+			cSuit = data[y][x].lock()->GetSuit();
+			number = data[y][x].lock()->GetNum();
 		}
 	}
 
