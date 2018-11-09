@@ -39,10 +39,11 @@ void SceneMain::Init()
 			{
 				while (num < 5)
 				{
-					num = GetRand(13);
+					num = GetRand(12)+1;
 				}
 			}
-			auto tmp = make_shared<Card>(VECTOR2{ x,y }, suit, num);
+			std::shared_ptr<Card> tmp = board->AddObjList(make_shared<Card>(VECTOR2{ x,y }, suit, num));
+
 			board->SetBoard(tmp);
 
 		}
@@ -79,12 +80,14 @@ Scene SceneMain::Update(Scene own)
 		lpGameTask.PressKey(KEY_INPUT_A))
 	{
 	// 移動前のマスを移動不可マスにする
-		auto tmp = make_shared<Card>(player->GetPos(),SUIT_NON,0);
+		// auto tmp = make_shared<Card>(player->GetPos(),,0);
+		 //AddObjList(tmp);
 		player->Update();
-		board->SetBoard(tmp);
-		/*auto tmp2 = board->GetBoard(player->GetPos()/60);
-		player->SetSuit(tmp2.lock()->GetSuit());
-		player->SetNumber(tmp2.lock()->GetNum());*/
+		// board->SetBoard(tmp);
+
+
+		player->SetSuit(board->GetSuit(player->GetPos() / 60));
+		player->SetNumber(board->GetNumber(player->GetPos() / 60));
 	}
 	
 	board->Update();

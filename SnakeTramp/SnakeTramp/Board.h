@@ -45,8 +45,8 @@ public:
 	void Draw(void);
 
 	int score;
+	std::shared_ptr<Card> AddObjList(card_shared && objPtr);
 private:
-	auto AddObjList(card_shared && objPtr);
 
 	vector<std::weak_ptr<Card>*> data;
 	vector<std::weak_ptr<Card>> baseData;
