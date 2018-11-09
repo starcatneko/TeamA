@@ -6,16 +6,8 @@
 
 void Board::Update(void)
 {
-	for (int x = 0; x < troutCnt.x + 1; x++)
-	{
-		DrawLine(x * TROUT_SIZE + 180, 80, x * TROUT_SIZE + 180, 80 + 60 * 7, 0xffffff);
-	}
-	for (int y = 0; y < troutCnt.y + 1; y++)
-	{
-		DrawLine(180,y * TROUT_SIZE + 80, 180 + 60 * 7, y * TROUT_SIZE + 80, 0xffffff);
-	}
+	Draw();
 	PushTrout();
-	DrawString(50, 0, DebugChar, 0xffffff);
 }
 
 void Board::SetBoard(card_shared card)
@@ -93,6 +85,20 @@ void Board::PushTrout(void)
 		moveDirection = DIR_LEFT;
 		DebugChar = "¶";
 	}
+}
+
+void Board::Draw(void)
+{
+	for (int x = 0; x < troutCnt.x + 1; x++)
+	{
+		DrawLine(x * TROUT_SIZE + 180, 80, x * TROUT_SIZE + 180, 80 + 60 * 7, 0xffffff);
+	}
+	for (int y = 0; y < troutCnt.y + 1; y++)
+	{
+		DrawLine(180, y * TROUT_SIZE + 80, 180 + 60 * 7, y * TROUT_SIZE + 80, 0xffffff);
+	}
+
+	DrawString(50, 0, DebugChar, 0xffffff);
 }
 
 auto Board::AddObjList(card_shared && objPtr)
