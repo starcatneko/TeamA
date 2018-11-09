@@ -31,6 +31,16 @@ card_weak Board::GetBoard(VECTOR2 pos)
 	return data[pos.y][pos.x];
 }
 
+CARD_SUIT Board::GetSuit(VECTOR2 pos)
+{
+	return data[pos.y][pos.x].lock()->GetSuit();
+}
+
+int Board::GetNumber(VECTOR2 pos)
+{
+	return data[pos.y][pos.x].lock()->GetNum();
+}
+
 bool Board::CheckBoard(VECTOR2 pos, int moveDirection)
 {
 	switch (moveDirection)
@@ -93,13 +103,12 @@ void Board::PushTrout(void)
 
 void Board::Draw(void)
 {
-	for (int x = 0; x < troutCnt.x + 1; x++)
+	for (int y = 0; y < 7; y++)
 	{
-		DrawLine(x * TROUT_SIZE + 180, 80, x * TROUT_SIZE + 180, 80 + 60 * 7, 0xffffff);
-	}
-	for (int y = 0; y < troutCnt.y + 1; y++)
-	{
-		DrawLine(180, y * TROUT_SIZE + 80, 180 + 60 * 7, y * TROUT_SIZE + 80, 0xffffff);
+		for (int x = 0; x < 7; x++)
+		{
+			VECTOR2 cPos;
+		}
 	}
 
 	DrawFormatString(700, 0, 0xffffff, "score = %d", score);
