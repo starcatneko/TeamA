@@ -63,6 +63,8 @@ private:
 	VECTOR2 boardSize;
 	VECTOR2 boardLT;
 
+	cardST_unique card;
+
 	card_sharedList cardList;
 	cardST_uniqueList suit;
 
