@@ -26,12 +26,10 @@ public:
 
 private:
 	std::weak_ptr<Card> card;
+	std::unique_ptr<Card> card_u;
 	std::shared_ptr<Board> board;
 	std::unique_ptr<Player> player;
-<<<<<<< HEAD
 	// アニメーション処理等で使うカウンター
 	UINT anim_cnt;
-=======
->>>>>>> master
 };
 

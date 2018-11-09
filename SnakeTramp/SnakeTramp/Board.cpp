@@ -29,15 +29,13 @@ card_weak Board::GetBoard(VECTOR2 pos)
 	{
 		if (*suit.begin())
 		{
+			return data[pos.y][pos.x];
 		}
 	}
-<<<<<<< HEAD
 	return data[pos.y][pos.x];
 
 	//return SUIT_NON;
-=======
 	return data[0][0];
->>>>>>> master
 }
 
 bool Board::CheckBoard(VECTOR2 pos, int moveDirection)
@@ -70,17 +68,9 @@ bool Board::Resize(VECTOR2 vec)
 	}
 	
 	screenSize = VECTOR2(800, 600);
-<<<<<<< HEAD
-	boardLT = VECTOR2(((screenSize.x - (TROUT_SIZE * boardSize.x)) / 2), ((screenSize.y - (TROUT_SIZE * boardSize.y)) / 2));
-=======
-<<<<<<< HEAD
-	boardLT = VECTOR2(((screenSize.x - (TROUT_SIZE * boardSize.x)) / 2),
-=======
 	boardLT = VECTOR2(((screenSize.x - (TROUT_SIZE * boardSize.x)) / 2), 
->>>>>>> MInt
 						((screenSize.y - (TROUT_SIZE * boardSize.y)) / 2));
 
->>>>>>> master
 	return true;
 }
 

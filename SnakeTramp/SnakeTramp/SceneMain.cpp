@@ -24,13 +24,9 @@ void SceneMain::Init()
 	
 	// boardのコンストラクタに引数を渡さない場合、BOARD_DEF_TROUT_XとBOARD_DEF_TROUT_Yが渡される
 	board = std::make_shared<Board>();
-<<<<<<< HEAD
-=======
 	// player(初期座標, 初期サイズ, 初期所持スート, 初期所持数字)
 	player = std::make_unique<Player>( BOARD_START, VECTOR2( TROUT_SIZE, TROUT_SIZE), SUIT_SPADE, 1);
 	// cardの生成
-	card = std::make_unique<Card>(VECTOR2( 0, 100), player->GetSuit(), player->GetNumber());
->>>>>>> master
 
 	for (int x = 1; x < BOARD_DEF_TROUT_X; x++)
 	{
@@ -58,7 +54,7 @@ void SceneMain::Init()
 
 Scene SceneMain::Update(Scene own)
 {
-
+	//card_u->Draw();
 	
 	// 1～3のいずれかのキーを押しながら方向キーを押した時に、
 	// 入力された方向に入力された番号のストックのカードを設置する
@@ -70,28 +66,29 @@ Scene SceneMain::Update(Scene own)
 			KEY_INPUT_UP ||
 			KEY_INPUT_RIGHT ||
 			KEY_INPUT_DOWN ||
-			KEY_INPUT_LEFT
-		)
+			KEY_INPUT_LEFT))
 		{
-			auto dirVec = {{0,-1},{1,0},{0,1},{-1,0}};
+			// auto dirVec[] = { {0,-1},{1,0},{0,1},{-1,0} };
 			//Board::SetBoard(Plyaer.Pos+方向,stockSuit,stockNum);
 		}
 	}
-	else if(方向キー入力)
+	
+	else if(lpGameTask.PressKey(KEY_INPUT_W) ||
+		lpGameTask.PressKey(KEY_INPUT_D) ||
+		lpGameTask.PressKey(KEY_INPUT_S) ||
+		lpGameTask.PressKey(KEY_INPUT_A))
 	{
 	// 移動前のマスを移動不可マスにする
-		auto tmp = make_shared<Card>(Player::GetPos(),Player::GetSuit(),0);
-		Player::移動(方向);
-		Board::SetBoard(tmp);
+		auto tmp = make_shared<Card>(player->GetPos(),SUIT_NON,0);
+		player->Update();
+		board->SetBoard(tmp);
+		/*auto tmp2 = board->GetBoard(player->GetPos()/60);
+		player->SetSuit(tmp2.lock()->GetSuit());
+		player->SetNumber(tmp2.lock()->GetNum());*/
 	}
 	
 	board->Update();
-<<<<<<< HEAD
-	
-=======
 	// playerの挙動制御
-	player->Update();
->>>>>>> master
 
 	/*
 	if(player.pos == BOARD_DEF_GOAL ||
@@ -123,7 +120,6 @@ Scene SceneMain::Update(Scene own)
 
 bool SceneMain::Draw()
 {
-<<<<<<< HEAD
 	/*
 	 board->描画(); // card->Draw()
 	 lpGameTask.player->描画();
@@ -131,26 +127,23 @@ bool SceneMain::Draw()
 
 	for (int x = 1; x < BOARD_DEF_TROUT_X; x++)
 	{
-		for (int y = 0; y < BOARD_DEF_TROUT_Y; y++)
+		for (int y = 1; y < BOARD_DEF_TROUT_Y; y++)
 		{
-			
-		//			weak_ptr<Card> tmp = board->GetBoard(VECTOR2{ x,y });
-		//			tmp.lock()->GetPos();
+			/*
+					auto tmp = (board->GetBoard(VECTOR2{ x,y }));
+					tmp.lock()->Draw();
+					*/
 		}
 	}
 	if(!card.expired())card.lock()->Draw();
 
 	DrawString(0, 0, "Main", 0x888888);	
-=======
 	// Board::描画();
 	// Player::描画();
 	player->Draw();
 	//(*card).Draw();
-	card->Draw();
-
 	DrawString(0, 0, "Main", 0x888888);
 	
->>>>>>> master
 	return false;
 }
 

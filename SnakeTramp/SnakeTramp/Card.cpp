@@ -5,7 +5,7 @@
 Card::Card()
 {
 	Reset();
-	image.resize(1);	// vectorの使用範囲を指定
+	image.resize(1);			// vectorの使用範囲を指定
 	Load("trump.png");			// 読み込む画像がないため、わざと空白にしている
 	pos = { 0,0 };
 	suit = SUIT_NUM;
