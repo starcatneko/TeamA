@@ -25,6 +25,7 @@ void SceneMain::Init()
 	//card = std::make_unique<Card>(VECTOR2{ 2,2 }, SUIT_HEART, 12);
 	// boardのコンストラクタに引数を渡さない場合、BOARD_DEF_TROUT_XとBOARD_DEF_TROUT_Yが渡される
 	board = std::make_shared<Board>();
+
 	//player = std::make_unique<Player>(pos,suit,num);
 	//player->SetPos(BOARD_START);
 	//盤面、Player等初期化処理
@@ -41,7 +42,8 @@ Scene SceneMain::Update(Scene own)
 	{
 		if(方向キー入力)
 		{
-			int dirVec = 
+			{x,y}
+			auto dirVec = {{0,-1},{1,0},{0,1},{-1,0}};
 			Board::SetBoard(Plyaer.Pos+方向,stockSuit,stockNum);
 		}
 	}
@@ -54,6 +56,8 @@ Scene SceneMain::Update(Scene own)
 	}
 	*/
 	board->Update();
+	board->SetBoard(std::make_shared<Card>(VECTOR2{ 4,2 }, SUIT_DIA, 10));
+	board->GetBoard({ 4,2 });
 
 	/*
 	if(player.pos == BOARD_DEF_GOAL ||

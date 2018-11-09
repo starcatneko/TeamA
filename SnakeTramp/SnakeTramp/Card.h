@@ -5,6 +5,7 @@
 
 // カードのスート（柄）用
 enum CARD_SUIT {
+	SUIT_NON,
 	SUIT_SPADE,
 	SUIT_CRUB,
 	SUIT_DIA,
