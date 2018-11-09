@@ -6,6 +6,7 @@
 #include "Dxlib.h"
 
 #include "Card.h"
+#include "Player.h"
 
 #include <memory>
 
@@ -25,7 +26,8 @@ void SceneMain::Init()
 	//card = std::make_unique<Card>(VECTOR2{ 2,2 }, SUIT_HEART, 12);
 	// boardのコンストラクタに引数を渡さない場合、BOARD_DEF_TROUT_XとBOARD_DEF_TROUT_Yが渡される
 	board = std::make_shared<Board>();
-	
+	// player(初期座標, 初期サイズ, 初期所持スート, 初期所持数字)
+	player = std::make_unique<Player>( BOARD_START, VECTOR2( TROUT_SIZE, TROUT_SIZE), SUIT_SPADE, 1);
 
 	//盤面、Player等初期化処理
 }
@@ -48,6 +50,8 @@ Scene SceneMain::Update(Scene own)
 	}
 	*/
 	board->Update();
+	// playerの挙動制御
+	player->Update();
 
 	// if(Playerがゴールにたどり着く ||
 	// Playerの数値が規定範囲を超える)
@@ -63,6 +67,7 @@ bool SceneMain::Draw()
 {
 	// Board::描画();
 	// Player::描画();
+	player->Draw();
 	//(*card).Draw();
 	DrawString(0, 0, "Main", 0x888888);
 	

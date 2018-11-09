@@ -3,6 +3,7 @@
 
 class Board;
 class Card;
+class Player;
 
 class SceneMain :
 	public SceneState
@@ -16,5 +17,6 @@ public:
 
 	std::unique_ptr<Card> card;
 	std::shared_ptr<Board> board;
+	std::unique_ptr<Player> player;
 };
 
