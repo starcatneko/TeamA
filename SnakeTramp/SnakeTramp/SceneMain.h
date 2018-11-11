@@ -28,6 +28,7 @@ private:
 	std::shared_ptr<Board> board;
 	std::unique_ptr<Player> player;
 	// アニメーション処理等で使うカウンター
+	void PlayerMove();
 	UINT anim_cnt;
 };
 

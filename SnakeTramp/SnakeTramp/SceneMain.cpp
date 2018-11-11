@@ -28,10 +28,17 @@ void SceneMain::Init()
 	player = std::make_unique<Player>( BOARD_START, VECTOR2( TROUT_SIZE, TROUT_SIZE), SUIT_SPADE, 1);
 	// cardの生成
 
-	for (int x = 1; x < BOARD_DEF_TROUT_X; x++)
+	for (int x = 0; x < BOARD_DEF_TROUT_X; x++)
 	{
 		for (int y = 0; y < BOARD_DEF_TROUT_Y; y++)
 		{
+			if (x == 0)
+			{
+				std::shared_ptr<Card> tmp = board->AddObjList(make_shared<Card>(VECTOR2{ x,y },SUIT_NON, 0));
+
+			}
+
+
 			int num = GetRand(12)+1;
 			CARD_SUIT suit = CARD_SUIT(GetRand(3) + 1);
 
@@ -42,6 +49,11 @@ void SceneMain::Init()
 					num = GetRand(12)+1;
 				}
 			}
+
+			// 状況で調整
+
+			
+
 			std::shared_ptr<Card> tmp = board->AddObjList(make_shared<Card>(VECTOR2{ x,y }, suit, num));
 
 			board->SetBoard(tmp);
@@ -75,35 +87,10 @@ Scene SceneMain::Update(Scene own)
 	}else 
 		*/
 
-	int i;
+	DIR i;
 
-		if(lpGameTask.PressKey(i = KEY_INPUT_W) ||
-		lpGameTask.PressKey(i = KEY_INPUT_D) ||
-		lpGameTask.PressKey(i = KEY_INPUT_S) ||
-		lpGameTask.PressKey(i = KEY_INPUT_A))
-	{
-	// 移動前のマスを移動不可マスにする
-		// auto tmp = make_shared<Card>(player->GetPos(),,0);
-		 //AddObjList(tmp);
-		
-		// board->SetBoard(tmp);
+	PlayerMove();
 
-
-		//int  tmp_num;
-		//int tmp_suit;
-		//	board->GetNumber(player->GetPos() / 60) + player->GetNumber()
-
-			if (i == KEY_INPUT_W) player->Update(DIR_UP);
-			if (i == KEY_INPUT_A) player->Update(DIR_LEFT);
-			if (i == KEY_INPUT_S) player->Update(DIR_DOWN);
-			if (i == KEY_INPUT_D) player->Update(DIR_RIGHT);
-
-		
-		player->SetNumber(board->GetNumber(player->GetPos() / 60));
-		player->SetSuit(board->GetSuit(player->GetPos() / 60));
-
-
-	}
 	
 	board->Update();
 	// playerの挙動制御
@@ -151,6 +138,10 @@ bool SceneMain::Draw()
 			
 				auto tmp = (board->GetBoard(VECTOR2{ x,y }));
 				tmp.lock()->Draw();
+				int color = (tmp.lock()->GetSuit() <= SUIT_CRUB ? 0xffffff : 0xff0000);
+
+
+				DrawFormatString(tmp.lock()->GetPos().x*60, tmp.lock()->GetPos().y*60, color, "%d", tmp.lock()->GetNum());
 			
 		}
 	}
@@ -184,4 +175,79 @@ bool SceneMain::GoalEffect()
 		}
 	}
 	return false;
+}
+
+void SceneMain::PlayerMove()
+{
+	VECTOR2 sarchTBL[4] = { {0,-1},{ 1,0 },{ 0,1 },{ -1,0 } };
+	VECTOR2 vec;
+	DIR tmp_dir;
+	if (lpGameTask.PressKey(KEY_INPUT_W))
+	{
+		if (board->GetBoard(VECTOR2{ player->GetPos().x / 60 ,player->GetPos().y / 60 - 1 }).expired()
+			|| (player->GetPos().y / 60 - 1 < 0)) return ;
+		vec = sarchTBL[DIR_UP];
+		tmp_dir = DIR_UP;
+	}
+	if (lpGameTask.PressKey(KEY_INPUT_D))
+	{
+		if (board->GetBoard(VECTOR2{ player->GetPos().x / 60 + 1,player->GetPos().y / 60 }).expired()
+		||(player->GetPos().x / 60 + 1 > BOARD_DEF_TROUT_X)) return ;
+		vec = sarchTBL[DIR_RIGHT];
+		tmp_dir = DIR_RIGHT;
+	}
+	if (lpGameTask.PressKey(KEY_INPUT_S))
+	{
+		if (board->GetBoard(VECTOR2{ player->GetPos().x / 60 ,player->GetPos().y / 60 + 1 }).expired() 
+			|| (player->GetPos().y / 60 + 1> BOARD_DEF_TROUT_Y - 1)) return ;
+		vec = sarchTBL[DIR_DOWN];
+		tmp_dir = DIR_DOWN;
+	}
+	if (lpGameTask.PressKey(KEY_INPUT_A))
+	{
+		if (board->GetBoard(VECTOR2{ player->GetPos().x / 60 - 1,player->GetPos().y / 60 }).expired() 
+			|| (player->GetPos().x / 60 - 1< 0)) return ;
+		vec = sarchTBL[DIR_LEFT];
+		tmp_dir = DIR_LEFT;
+	}
+
+	// 移動前のマスを移動不可マスにする
+	// auto tmp = make_shared<Card>(player->GetPos(),,0);
+	//AddObjList(tmp);
+	// board->SetBoard(tmp);
+
+	VECTOR2 tmp_pos = player->GetPos()/60 + vec;
+
+	int  tmp_num = board->GetNumber(tmp_pos/60);
+	CARD_SUIT tmp_suit = board->GetSuit(tmp_pos/60);
+
+	// スートが空白
+	if (tmp_suit == SUIT_NON)
+	{
+		return;
+	}
+
+	if (tmp_suit == player->GetSuit())
+	{
+		tmp_num *= 2;
+	}
+	if (tmp_suit <= SUIT_CRUB)
+	{
+		// SUITが黒字
+		tmp_num = tmp_num;
+	}
+	else
+	{
+		// SUITが赤字
+		tmp_num = -tmp_num;
+	}
+
+	//	board->GetNumber(player->GetPos() / 60) + player->GetNumber()
+	//(board->GetSuit(
+	player->SetNumber(tmp_num);
+	player->SetSuit(tmp_suit);
+
+	player->Update(tmp_dir);
+
+
 }
