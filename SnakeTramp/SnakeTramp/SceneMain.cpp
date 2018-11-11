@@ -21,13 +21,14 @@ void SceneMain::Init()
 {
 	// 万が一Boardのunique_ptrが初期化されていなかった場合resetをする
 	if (board) board.reset();
-	
 	// boardのコンストラクタに引数を渡さない場合、BOARD_DEF_TROUT_XとBOARD_DEF_TROUT_Yが渡される
 	board = std::make_shared<Board>();
 	// player(初期座標, 初期サイズ, 初期所持スート, 初期所持数字)
 	player = std::make_unique<Player>( BOARD_START, VECTOR2( TROUT_SIZE, TROUT_SIZE), SUIT_SPADE, 1);
-	// cardの生成
+	
 
+
+	// 盤面にカード生成
 	for (int y = 0; y < BOARD_DEF_TROUT_Y; y++)
 	{
 		for (int x = 0; x < BOARD_DEF_TROUT_X; x++)
@@ -74,62 +75,56 @@ void SceneMain::Init()
 
 		}
 	}
-	//player = std::make_unique<Player>(pos,suit,num);
-	//player->SetPos(BOARD_START);
-	//盤面、Player等初期化処理
+
+	Goalflg = false;
 }
 
 bool SceneMain::SetStock()
 {
 	// 1～3のいずれかのキーを押しながら方向キーを押した時に、
 	// 入力された方向に入力された番号のストックのカードを設置する
+	VECTOR2 sarchTBL[4] = { { 0,-1 },{ 1,0 },{ 0,1 },{ -1,0 } };
 
-	int stock_num;
+	int stock_num = 0;
 
 	if (CheckHitKey(KEY_INPUT_1)) stock_num = 1;
 	if (CheckHitKey(KEY_INPUT_2)) stock_num = 2;
 	if (CheckHitKey(KEY_INPUT_3)) stock_num = 3;
+
+	if (stock_num != 0)
 	{
-		if (lpGameTask.PressKey(KEY_INPUT_W))
+		if (lpGameTask.PressKey(KEY_INPUT_UP))
 		{
-			//board->SetBoard();
+			board->SetBoard(board->AddObjList(make_shared<Card>(player->GetPos() / 60 + sarchTBL[DIR_UP], SUIT_DIA, 8)));
+			return true;
 		}
-		if (lpGameTask.PressKey(KEY_INPUT_D))
+		if (lpGameTask.PressKey(KEY_INPUT_RIGHT))
 		{
+			board->SetBoard(board->AddObjList(make_shared<Card>(player->GetPos() / 60 + sarchTBL[DIR_RIGHT], SUIT_DIA, 8)));
+			return true;
 		}
-		if (lpGameTask.PressKey(KEY_INPUT_S))
+		if (lpGameTask.PressKey(KEY_INPUT_DOWN))
 		{
+			board->SetBoard(board->AddObjList(make_shared<Card>(player->GetPos() / 60 + sarchTBL[DIR_DOWN], SUIT_DIA, 8)));
+			return true;
 		}
-		if (lpGameTask.PressKey(KEY_INPUT_A))
+		if (lpGameTask.PressKey(KEY_INPUT_LEFT))
 		{
+			board->SetBoard(board->AddObjList(make_shared<Card>(player->GetPos() / 60 + sarchTBL[DIR_LEFT], SUIT_DIA, 8)));
+			return true;
 		}
 	}
-	return true;
+	return false;
 }
 
 Scene SceneMain::Update(Scene own)
 {
-	//card_u->Draw();
-	/*
-	// 1～3のいずれかのキーを押しながら方向キーを押した時に、
-	// 入力された方向に入力された番号のストックのカードを設置する
-	if (CheckHitKey(KEY_INPUT_1) ||
-		CheckHitKey(KEY_INPUT_2) ||
-		CheckHitKey(KEY_INPUT_3))
+	// ストック操作が行われない場合、プレイヤー操作の判定をする
+	if (!SetStock())
 	{
-		if(lpGameTask.PressKey(
-			KEY_INPUT_UP ||
-			KEY_INPUT_RIGHT ||
-			KEY_INPUT_DOWN ||
-			KEY_INPUT_LEFT))
-		{
-			// auto dirVec[] = { {0,-1},{1,0},{0,1},{-1,0} };
-			//Board::SetBoard(Plyaer.Pos+方向,stockSuit,stockNum);
-		}
-	}else 
-		*/
-
-	PlayerMove();
+		PlayerMove();
+	}
+	
 	board->Update();
 
 	/*
@@ -143,16 +138,16 @@ Scene SceneMain::Update(Scene own)
 
 
 	// 画面遷移フラグ true:遷移処理開始
-	static bool flg = false;
+	Goalflg = false;
 	if(lpGameTask.PressKey(KEY_INPUT_Z))
 	{
-		flg = true;
+		Goalflg = true;
 	}
-	if (flg == true)
+	if (Goalflg == true)
 	{
 		if (GoalEffect() == true)
 		{
-			flg = false;
+			Goalflg = false;
 			return std::make_unique<SceneResult>();
 		}
 
@@ -177,8 +172,10 @@ bool SceneMain::Draw()
 				int color = (tmp.lock()->GetSuit() <= SUIT_CRUB ? 0xffffff : 0xff0000);
 
 
-				DrawFormatString(tmp.lock()->GetPos().x*60+ DRAW_DISTANCE.x,
-					tmp.lock()->GetPos().y*60+ DRAW_DISTANCE.y, color, "%d", tmp.lock()->GetNum());
+				DrawFormatString(tmp.lock()->GetPos().x * 60 + DRAW_DISTANCE.x,
+					tmp.lock()->GetPos().y * 60 + DRAW_DISTANCE.y, color, "%d", tmp.lock()->GetNum());
+				DrawFormatString(tmp.lock()->GetPos().x * 60 + DRAW_DISTANCE.x+32,
+					tmp.lock()->GetPos().y * 60 + DRAW_DISTANCE.y+32, color, "%d", tmp.lock()->GetSuit());
 			
 		}
 	}

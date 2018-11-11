@@ -30,6 +30,7 @@ private:
 	std::unique_ptr<Player> player;
 	// アニメーション処理等で使うカウンター
 	void PlayerMove();
+	bool Goalflg;
 	UINT anim_cnt;
 };
 
