@@ -35,20 +35,22 @@ void Player::Update(DIR dir)
 
 void Player::Draw()
 {
-	if (suit == SUIT_SPADE) DrawString(pos.x, pos.y - 45, "SPADE", 0xff9e3d);
-	else if (suit == SUIT_CRUB) DrawString(pos.x, pos.y - 45, "CRUB", 0xff9e3d);
-	else if (suit == SUIT_DIA) DrawString(pos.x, pos.y - 45, "DIA", 0xff9e3d);
-	else if (suit == SUIT_HEART) DrawString(pos.x, pos.y - 45, "HEART", 0xff9e3d);
+	VECTOR2 drawpos = pos + DRAW_DISTANCE;
+
+	if (suit == SUIT_SPADE) DrawString(drawpos.x, drawpos.y - 45, "SPADE", 0xff9e3d);
+	else if (suit == SUIT_CRUB) DrawString(drawpos.x, drawpos.y - 45, "CRUB", 0xff9e3d);
+	else if (suit == SUIT_DIA) DrawString(drawpos.x, drawpos.y - 45, "DIA", 0xff9e3d);
+	else if (suit == SUIT_HEART) DrawString(drawpos.x, drawpos.y - 45, "HEART", 0xff9e3d);
 
 	DrawFormatString(0/*pos.x*/, 30/*pos.y - 45*/, 0xffffff, "pos.x = %d", pos.x);
 	DrawFormatString(0/*pos.x*/, 45/*pos.y - 30*/, 0xffffff, "pos.y = %d", pos.y);
-	DrawFormatString(pos.x,pos.y - 30, 0xff9e3d, "%d", number);
+	DrawFormatString(drawpos.x, drawpos.y - 30, 0xff9e3d, "%d", number);
 	// アニメーションカウント
 	if (animCnt >= 0) animCnt++;
 	if (animCnt > 38) animCnt = 0;
 	// 描画
 	DrawRectRotaGraph2(
-		pos.x + (size.x / 2), pos.y + (size.y / 2),
+		drawpos.x + (size.x / 2), drawpos.y + (size.y / 2),
 		size.x * (animCnt / 20),size.y * dir,
 		size.x,size.y,
 		(size.x / 2),(size.y / 2),
@@ -57,7 +59,7 @@ void Player::Draw()
 		true,false
 	);
 
-	DrawBox( pos.x, pos.y, pos.x + size.x, pos.y + size.y, 0xff0000, false);
+	DrawBox(drawpos.x, drawpos.y, drawpos.x + size.x, drawpos.y + size.y, 0xff0000, false);
 }
 
 void Player::Key()

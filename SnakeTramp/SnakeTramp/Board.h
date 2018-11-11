@@ -5,13 +5,6 @@
 #include "VECTOR2.h"
 #include "Card.h"
 
-#define BOARD_DEF_TROUT_X		(7)		// Ï½‚ÌÃŞÌ«ÙÄ‚Ì”
-#define BOARD_DEF_TROUT_Y		(7)		// Ï½‚ÌÃŞÌ«ÙÄ‚Ì”
-
-#define BOARD_START				(VECTOR2(0,0))	// ÌßÚ²Ô°‚Ì½À°ÄˆÊ’u
-#define BOARD_DEF_GOAL			((VECTOR2(BOARD_DEF_TROUT_X + 1,BOARD_DEF_TROUT_Y))
-
-#define TROUT_SIZE				(60)	// Ï½‚Ì»²½Ş
 
 
 using namespace std;

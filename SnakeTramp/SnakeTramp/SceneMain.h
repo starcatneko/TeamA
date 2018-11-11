@@ -18,6 +18,7 @@ public:
 	SceneMain();
 	~SceneMain();
 	void Init();
+	bool SetStock();
 	Scene Update(Scene own);
 	bool Draw();
 	bool GoalEffect();

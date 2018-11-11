@@ -124,7 +124,10 @@ void Board::Draw(void)
 			cPos = data[y][x].lock()->GetPos();
 			cSuit = data[y][x].lock()->GetSuit();
 			number = data[y][x].lock()->GetNum();
+
+			data[y][x].lock()->Draw();
 		}
+	
 	}
 
 	DrawFormatString(700, 0, 0xffffff, "score = %d", score);

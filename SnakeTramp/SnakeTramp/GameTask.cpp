@@ -3,7 +3,6 @@
 #include "SceneTitle.h"
 #include "SceneMain.h"
 
-
 std::unique_ptr<GameTask, GameTask::GameTaskDeleter> GameTask::s_Instance(new GameTask());
 
 
