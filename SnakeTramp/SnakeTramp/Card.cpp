@@ -1,5 +1,6 @@
 #include "Card.h"
 #include "ImgMng.h"
+#include "GameTask.h"
 #include "DxLib.h"
 
 Card::Card()
@@ -33,17 +34,19 @@ void Card::Draw()
 	VECTOR2 size = {50,75};
 	int num = 0;
 	// 絵柄
+	/*
 	if (suit == SUIT_SPADE) DrawString(pos.x, pos.y, "スペード ", SetColor(suit));
 	else if (suit == SUIT_CRUB) DrawString(pos.x, pos.y, "クラブ", SetColor(suit));
 	else if (suit == SUIT_DIA) DrawString(pos.x, pos.y, "ダイア", SetColor(suit));
 	else if (suit == SUIT_HEART) DrawString(pos.x, pos.y, "ハート", SetColor(suit));
+	*/
 	// 番号
 	if (suit == SUIT_SPADE) num = 80;
 	else num = 60;
 	DrawFormatString(pos.x + num, pos.y, SetColor(suit),"%d",number);
 	// 画像
 	DrawRectRotaGraph2(
-		pos.x + (size.x / 2),pos.y + (size.y / 2),
+		pos.x * 60 + (size.x / 2) + DRAW_DISTANCE.x,pos.y * 60 + (size.y / 2) + DRAW_DISTANCE.y,
 		size.x * (CARD_SUIT)(suit - 1), size.y * (number - 1),
 		size.x,size.y,
 		(size.x / 2),(size.y / 2),

@@ -11,7 +11,7 @@ void Board::Update(void)
 	{
 		score++;
 	}
-	Draw();
+	//Draw();
 	PushTrout();
 }
 
@@ -109,6 +109,7 @@ void Board::PushTrout(void)
 
 void Board::Draw(void)
 {
+	
 	for (int y = 0; y < 7; y++)
 	{
 		for (int x = 0; x < 7; x++)
@@ -124,12 +125,12 @@ void Board::Draw(void)
 			cPos = data[y][x].lock()->GetPos();
 			cSuit = data[y][x].lock()->GetSuit();
 			number = data[y][x].lock()->GetNum();
-
+			
 			data[y][x].lock()->Draw();
 		}
 	
 	}
-
+	
 	DrawFormatString(700, 0, 0xffffff, "score = %d", score);
 
 	DrawString(50, 0, DebugChar, 0xffffff);

@@ -16,7 +16,10 @@ public:
 	std::shared_ptr<Board> board;
 	bool Draw();
 
+private:
+	bool endflg;
+	// boardの0,0に数字が入っていたらゲームオーバー判定
+	bool clearflg;
 	bool Effect();
-
 };
 

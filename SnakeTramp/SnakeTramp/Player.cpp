@@ -7,7 +7,7 @@ Player::Player(VECTOR2 pos, VECTOR2 size, CARD_SUIT suit, int number)
 {
 	Reset();
 	image.resize(1);
-	Load("Reimu.png");
+	Load("pl.png");
 	this->pos = pos;
 	this->size = size;
 	this->suit = suit;
@@ -30,6 +30,7 @@ void Player::Update(Card &card)
 
 void Player::Update(DIR dir)
 {
+	this->dir = dir;
 	Move(dir);
 }
 

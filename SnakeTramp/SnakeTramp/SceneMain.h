@@ -22,9 +22,6 @@ public:
 	Scene Update(Scene own);
 	bool Draw();
 	bool GoalEffect();
-	bool Fade_in();
-	bool Effect();
-
 private:
 	std::shared_ptr<Board> board;
 	std::unique_ptr<Player> player;
@@ -32,5 +29,9 @@ private:
 	void PlayerMove();
 	bool Goalflg;
 	UINT anim_cnt;
+
+	std::shared_ptr<Card> PLcard;
+
+	std::shared_ptr<Card> stock[STOCK_NUM];
 };
 

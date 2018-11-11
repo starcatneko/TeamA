@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include "ImgMng.h"
 #include "GameTask.h"
 
 
