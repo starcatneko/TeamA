@@ -70,7 +70,6 @@ void SceneMain::Init()
 			}
 			
 			*/
-
 			std::shared_ptr<Card> tmp = board->AddObjList(make_shared<Card>(VECTOR2{ x,y }, suit, num));
 			board->SetBoard(tmp);
 
@@ -143,6 +142,9 @@ bool SceneMain::Draw()
 	 board->•`‰æ(); // card->Draw()
 	 lpGameTask.player->•`‰æ();
 	*/
+	VECTOR2 bPos = {100,100};
+
+	//DrawBox(bPos.x, bPos.y, bPos.x+60, bPos.y +60,0x00ff00,true);
 
 	for (auto itr : stock)
 	{

@@ -7,7 +7,7 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 16);
-	ChangeWindowMode(true);
+	ChangeWindowMode(false);
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	if (DxLib_Init() == -1)		// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»ˆ—

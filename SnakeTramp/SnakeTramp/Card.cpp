@@ -17,7 +17,7 @@ Card::Card(VECTOR2 pos, CARD_SUIT suit, int number)
 {
 	Reset();
 	image.resize(1);	// vectorの使用範囲を指定
-	Load("trump.png");			// 読み込む画像がないため、わざと空白にしている
+	Load("trump2.png");			// 読み込む画像がないため、わざと空白にしている
 	this->pos = pos;
 	this->suit = suit;
 	this->number = number;
@@ -31,7 +31,8 @@ Card::~Card()
 void Card::Draw()
 {
 	// カードのサイズ
-	VECTOR2 size = {50,75};
+	//VECTOR2 size = {50,75};
+	VECTOR2 size = { 60,60 };
 	int num = 0;
 	// 絵柄
 	/*
