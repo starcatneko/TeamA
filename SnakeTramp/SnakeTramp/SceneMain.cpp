@@ -79,7 +79,7 @@ void SceneMain::Init()
 	
 	for (int i = 0; i < STOCK_NUM; i++)
 	{
-		stock[i] = board->AddObjList(make_shared<Card>(VECTOR2{ BOARD_DEF_TROUT_X, i*2 }, CARD_SUIT(GetRand(3) + 1), GetRand(13) + 1));
+		stock[i] = board->AddObjList(make_shared<Card>(VECTOR2{ BOARD_DEF_TROUT_X, i*2 }, CARD_SUIT(GetRand(3) + 1), GetRand(12) + 1));
 	}
 
 	std::shared_ptr<Card> tmp = board->AddObjList(make_shared<Card>(BOARD_DEF_GOAL, SUIT_SPADE, 0));
