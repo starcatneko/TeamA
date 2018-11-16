@@ -2,6 +2,7 @@
 #include "SceneState.h"
 #include <memory>
 #include <map>
+#include <vector>
 
 class Board;
 class Player;
@@ -29,6 +30,12 @@ private:
 	void PlayerMove();
 	bool Goalflg;
 	UINT anim_cnt;
+
+	void Key();
+	char keyData[256];
+	char keyDataOld[256];
+	bool flag;
+	std::vector<int> image;
 
 	std::shared_ptr<Card> PLcard;
 

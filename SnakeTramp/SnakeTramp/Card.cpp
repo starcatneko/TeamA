@@ -44,7 +44,7 @@ void Card::Draw()
 	// î‘çÜ
 	if (suit == SUIT_SPADE) num = 80;
 	else num = 60;
-	DrawFormatString(pos.x + num, pos.y, SetColor(suit),"%d",number);
+	//DrawFormatString(pos.x + num, pos.y, SetColor(suit),"%d",number);
 	// âÊëú
 	DrawRectRotaGraph2(
 		pos.x * 60 + (size.x / 2) + DRAW_DISTANCE.x,pos.y * 60 + (size.y / 2) + DRAW_DISTANCE.y,

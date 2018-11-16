@@ -6,6 +6,7 @@
 #include "Dxlib.h"
 #include "Card.h"
 #include "Player.h"
+#include "ImgMng.h"
 
 #include <memory>
 
@@ -28,6 +29,11 @@ void SceneMain::Init()
 	player = std::make_unique<Player>( BOARD_START, VECTOR2( TROUT_SIZE, TROUT_SIZE), SUIT_SPADE, 10);
 	
 	PLcard = std::make_shared<Card>(VECTOR2{ -2,1 }, player->GetSuit(), 1);
+
+	image.resize(2);
+	flag = false;
+	image[0] = ImgMng::GetInstance().Load("../Assets/Image/Panel.png");
+	image[1] = ImgMng::GetInstance().Load("../Assets/Image/説明.png");
 
 	// 盤面にカード生成
 	for (int y = 0; y < BOARD_DEF_TROUT_Y; y++)
@@ -89,7 +95,7 @@ void SceneMain::Init()
 
 Scene SceneMain::Update(Scene own)
 {
-
+	Key();
 	// ゲームオーバー
 	if (player->GetNumber() <= 0 || player->GetNumber() >= 22)
 	{
@@ -143,25 +149,48 @@ bool SceneMain::Draw()
 	 lpGameTask.player->描画();
 	*/
 	
+	// 始まりと終わりを視覚化
 	{
 		// スタート
 		VECTOR2 bPos = { 160,120 };
-		unsigned int color = 0x000000;
-		DrawBox(bPos.x, bPos.y, bPos.x + 60, bPos.y + 60, 0x00ff00, true);
-		DrawString(bPos.x, bPos.y, "start", 0xffffff);
+		int size = 60;
+		DrawRectRotaGraph2(
+			bPos.x + (size/ 2), bPos.y + (size / 2),
+			0,0,
+			size,size,
+			(size / 2),(size / 2),
+			1.0f, 0.0f,
+			image[0],
+			true,false
+		);
 		// ゴール
-		DrawBox(bPos.x + (60 * 8), bPos.y + (60 * 6), bPos.x + (60 * 8) + 60, bPos.y + (60 * 6) + 60, 0x00ff00, true);
-		DrawString(bPos.x + (60 * 8), bPos.y + (60 * 6), "gool", 0xffffff);
+		DrawRectRotaGraph2(
+			(bPos.x + (60 * 8)) + (size / 2), (bPos.y + (60 * 6)) + (size / 2),
+			size, 0,
+			size, size,
+			(size / 2), (size / 2),
+			1.0f, 0.0f,
+			image[0],
+			true, false
+		);
 	}
 
-	// 0,0 は (220,180)
-	for (int i = 0; i < BOARD_DEF_TROUT_Y; i++) {
-		for (int j = 1; j < BOARD_DEF_TROUT_X - 1; j++) {
-			//board->GetBoard(VECTOR2{ player->GetPos().x / 60 ,player->GetPos().y / 60 - 1 }).expired()
-			if (!board->GetBoard(VECTOR2{ (220 * j) / 60 ,(180 * i) / 60 - 1 }).expired()) {
-				
-			}
-		}
+	// 手札背景
+	{
+		VECTOR2 pos = { 675,95 };
+		VECTOR2 size = { 110,350 };
+		DrawBox(pos.x, pos.y - 30, pos.x + size.x, pos.y + size.y, 0x898989, true);
+		DrawBox(pos.x + 15, pos.y + 15, (pos.x + size.x) - 15, (pos.y + size.y) - 15, 0x606060, true);
+		DrawString( pos.x + 3, pos.y - 12, "Playerの手札", 0xffffff);
+	}
+
+	// 自分の状況
+	{
+		VECTOR2 pos = { 15, 100};
+		VECTOR2 size = { 110, 165 };
+		DrawBox(pos.x, pos.y - 30, pos.x + size.x, pos.y + size.y, 0x898989, true);
+		DrawBox(pos.x + 15, pos.y + 15, (pos.x + size.x) - 15, (pos.y + size.y) - 15, 0x606060, true);
+		DrawString(pos.x + 3, pos.y - 12, "Playerの状態", 0xffffff);
 	}
 
 	for (auto itr : stock)
@@ -186,13 +215,38 @@ bool SceneMain::Draw()
 			*/
 		}
 	}
+
+	
+	
 	PLcard->Draw();
 	static int  FontHandle = CreateFontToHandle(NULL, 40, 3);
 
-	DrawFormatStringToHandle(60, 128, 0xFFFFFF, FontHandle, "%d", player->GetNumber());
+	DrawFormatStringToHandle(60 - 10, 128, 0xFFFFFF, FontHandle, "%d", player->GetNumber());
+
+	// 通った場所がトランプの裏面になる
+	{
+		VECTOR2 cp = { 160, 120 };
+		int size = 60;
+		for (int y = 0; y < BOARD_DEF_TROUT_Y; y++) {
+			for (int x = 1; x < BOARD_DEF_TROUT_X - 1; x++) {
+				if (board->GetSuit({ x, y }) == SUIT_NON) {
+					DrawRectRotaGraph2(
+						cp.x + (size / 2) + (size * x), cp.y + (size / 2) + (size * y),
+						size * 2, 0,
+						size, size,
+						(size / 2),(size / 2),
+						1.0f,0.0f,
+						image[0],
+						true, false
+					);
+				}
+			}
+		}
+	}
 
 
 	player->Draw();
+
 
 
 	if (Goalflg == true)
@@ -209,11 +263,29 @@ bool SceneMain::Draw()
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 	}
 
-	DrawString(0, 0, "Main", 0x888888);	
+	//DrawString(0, 0, "Main", 0x888888);	
 	// Board::描画();
 	// Player::描画();
 	//(*card).Draw();
-	DrawString(0, 0, "Main", 0x888888);
+	//DrawString(0, 0, "Main", 0x888888);
+
+	// 操作説明
+	{
+		VECTOR2 pos = {0,500};
+		DrawString(pos.x, pos.y, "Qキーで簡単な取り扱い説明", 0xffffff);
+		DrawString(pos.x, pos.y + GetFontSize(), "開いたり閉じたりします", 0xffffff);
+		if (flag == false) {
+			if (keyData[KEY_INPUT_Q] && !keyDataOld[KEY_INPUT_Q]) {
+				flag = true;
+			}
+		}
+		else {
+			if (keyData[KEY_INPUT_Q] && !keyDataOld[KEY_INPUT_Q]) {
+				flag = false;
+			}
+			DrawGraph(0, 0, image[1], true);
+		}
+	}
 	
 	return false;
 }
@@ -346,4 +418,10 @@ void SceneMain::PlayerMove()
 
 	board->SetBoard(board->AddObjList(make_shared<Card>(tmp_pos, SUIT_NON, 0)));
 
+}
+
+void SceneMain::Key()
+{
+	memcpy(keyDataOld, keyData, sizeof(keyDataOld));
+	GetHitKeyStateAll(keyData);
 }

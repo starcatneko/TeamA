@@ -7,7 +7,7 @@ class Board;
 
 SceneResult::SceneResult()
 {
-
+	cnt = 0;
 }
 
 SceneResult::SceneResult(std::shared_ptr<Board> board)
@@ -76,6 +76,11 @@ bool SceneResult::Draw()
 		DrawBox(0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y, 0xffffff, true);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 
+		cnt++;
+		if (cnt / 30 % 2 == 0) {
+			DrawString(300, 300, "Zキーでタイトルへ戻ります", 0xffffff);
+		}
+
 		return false;
 	}
 
@@ -94,6 +99,11 @@ bool SceneResult::Draw()
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 - (255 / 15) * lpGameTask.Timer("end"));
 		DrawBox(0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y, 0x000000, true);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
+	}
+
+	cnt++;
+	if (cnt / 30 % 2 == 0) {
+		DrawString(300, 300, "Zキーでタイトルへ戻ります", 0xffffff);
 	}
 
 	return true;
