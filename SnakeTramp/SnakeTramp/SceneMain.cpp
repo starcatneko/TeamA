@@ -142,9 +142,27 @@ bool SceneMain::Draw()
 	 board->ï`âÊ(); // card->Draw()
 	 lpGameTask.player->ï`âÊ();
 	*/
-	VECTOR2 bPos = {100,100};
+	
+	{
+		// ÉXÉ^Å[Ég
+		VECTOR2 bPos = { 160,120 };
+		unsigned int color = 0x000000;
+		DrawBox(bPos.x, bPos.y, bPos.x + 60, bPos.y + 60, 0x00ff00, true);
+		DrawString(bPos.x, bPos.y, "start", 0xffffff);
+		// ÉSÅ[Éã
+		DrawBox(bPos.x + (60 * 8), bPos.y + (60 * 6), bPos.x + (60 * 8) + 60, bPos.y + (60 * 6) + 60, 0x00ff00, true);
+		DrawString(bPos.x + (60 * 8), bPos.y + (60 * 6), "gool", 0xffffff);
+	}
 
-	//DrawBox(bPos.x, bPos.y, bPos.x+60, bPos.y +60,0x00ff00,true);
+	// 0,0 ÇÕ (220,180)
+	for (int i = 0; i < BOARD_DEF_TROUT_Y; i++) {
+		for (int j = 1; j < BOARD_DEF_TROUT_X - 1; j++) {
+			//board->GetBoard(VECTOR2{ player->GetPos().x / 60 ,player->GetPos().y / 60 - 1 }).expired()
+			if (!board->GetBoard(VECTOR2{ (220 * j) / 60 ,(180 * i) / 60 - 1 }).expired()) {
+				
+			}
+		}
+	}
 
 	for (auto itr : stock)
 	{

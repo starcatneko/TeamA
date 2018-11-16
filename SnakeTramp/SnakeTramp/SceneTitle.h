@@ -11,6 +11,6 @@ public:
 	void Init();
 	Scene Update(Scene own);
 	bool Draw();
-
+	int cnt;
 };
 
