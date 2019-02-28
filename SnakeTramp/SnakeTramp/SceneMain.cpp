@@ -3,6 +3,7 @@
 #include "SceneTitle.h"
 #include "SceneResult.h"
 #include "VECTOR2.h"
+#include "ImgMng.h"
 #include "Dxlib.h"
 #include "Card.h"
 #include "Player.h"
@@ -12,6 +13,7 @@
 SceneMain::SceneMain()
 {
 	Init();
+	LoadDivGraph("../Assets/Image/Panel.png",3,3,1,60,60,image, false);
 }
 SceneMain::~SceneMain()
 {
@@ -144,6 +146,9 @@ bool SceneMain::Draw()
 	 lpGameTask.player->•`‰æ();
 	*/
 
+	DrawGraph((60 * 3) - 20, 60 * 2, image[0], true);
+	DrawGraph(160 + (60 * 8), (60 * 8), image[1], true);
+
 	for (auto itr : stock)
 	{
 		itr->Draw();
@@ -189,11 +194,11 @@ bool SceneMain::Draw()
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 	}
 
-	DrawString(0, 0, "Main", 0x888888);	
+	//DrawString(0, 0, "Main", 0x888888);	
 	// Board::•`‰æ();
 	// Player::•`‰æ();
 	//(*card).Draw();
-	DrawString(0, 0, "Main", 0x888888);
+	//DrawString(0, 0, "Main", 0x888888);
 	
 	return false;
 }

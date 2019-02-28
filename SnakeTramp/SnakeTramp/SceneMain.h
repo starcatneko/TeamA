@@ -30,6 +30,8 @@ private:
 	bool Goalflg;
 	UINT anim_cnt;
 
+	int image[3];
+
 	std::shared_ptr<Card> PLcard;
 
 	std::shared_ptr<Card> stock[STOCK_NUM];

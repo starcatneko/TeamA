@@ -43,8 +43,8 @@ void Player::Draw()
 	else if (suit == SUIT_DIA) DrawString(drawpos.x, drawpos.y - 45, "DIA", 0xff9e3d);
 	else if (suit == SUIT_HEART) DrawString(drawpos.x, drawpos.y - 45, "HEART", 0xff9e3d);
 
-	DrawFormatString(0/*pos.x*/, 30/*pos.y - 45*/, 0xffffff, "pos.x = %d", pos.x);
-	DrawFormatString(0/*pos.x*/, 45/*pos.y - 30*/, 0xffffff, "pos.y = %d", pos.y);
+	//DrawFormatString(0/*pos.x*/, 30/*pos.y - 45*/, 0xffffff, "pos.x = %d", pos.x);
+	//DrawFormatString(0/*pos.x*/, 45/*pos.y - 30*/, 0xffffff, "pos.y = %d", pos.y);
 	DrawFormatString(drawpos.x, drawpos.y - 30, 0xff9e3d, "%d", number);
 	// アニメーションカウント
 	if (animCnt >= 0) animCnt++;
