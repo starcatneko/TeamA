@@ -179,8 +179,11 @@ bool SceneMain::Draw()
 	{
 		VECTOR2 pos = { 675,95 };
 		VECTOR2 size = { 110,350 };
-		DrawBox(pos.x, pos.y - 30, pos.x + size.x, pos.y + size.y, 0x898989, true);
-		DrawBox(pos.x + 15, pos.y + 15, (pos.x + size.x) - 15, (pos.y + size.y) - 15, 0x606060, true);
+		DrawBox(pos.x, pos.y - 30, pos.x + size.x, pos.y + size.y, 0x898989, true); // 675,65 // 785,445
+		DrawBox(pos.x + 15, pos.y + 15, (pos.x + size.x) - 15, (pos.y + size.y) - 15, 0x606060, true); // 690, 110 // 760,430
+		DrawBox( 700, 120, 700 + 60, 120 + 60, 0x3b3c3d, true); // 一枚目使用済み
+		DrawBox( 700, 240, 700 + 60, 240 + 60, 0x3b3c3d, true); // 二枚目使用済み
+		DrawBox( 700, 360, 700 + 60, 360 + 60, 0x3b3c3d, true); // 三枚目使用済み
 		DrawString( pos.x + 3, pos.y - 12, "Playerの手札", 0xffffff);
 	}
 
@@ -271,7 +274,7 @@ bool SceneMain::Draw()
 
 	// 操作説明
 	{
-		VECTOR2 pos = {0,500};
+		VECTOR2 pos = {5,500};
 		DrawString(pos.x, pos.y, "Qキーで簡単な取り扱い説明", 0xffffff);
 		DrawString(pos.x, pos.y + GetFontSize(), "開いたり閉じたりします", 0xffffff);
 		if (flag == false) {
